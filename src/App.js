@@ -20,7 +20,7 @@ function App() {
     <>
       <IconButton
         onClick={handleClick}
-        style={{ position: "absolute", left: 20, bottom: 20 }}
+        style={{ position: "absolute", left: 20, bottom: 20, zIndex: 5000 }}
       >
         <img src={icon} style={{ width: 60, height: 60 }} />
       </IconButton>
