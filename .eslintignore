@@ -1,0 +1,5 @@
+!.eslintrc
+node_modules
+.vscode/settings.json
+dist
+/**/*.d.ts
