@@ -44,9 +44,11 @@ if (!rootElement) {
 //   </WagmiConfig>
 // );
 
-ReactDOM.render(
-  <Frame>
-    <App />
-  </Frame>,
-  rootElement
-);
+window.addEventListener('load', event => {
+  ReactDOM.render(
+    <Frame>
+      <App />
+    </Frame>,
+    rootElement
+  );
+});

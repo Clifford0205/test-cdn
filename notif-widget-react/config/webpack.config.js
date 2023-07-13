@@ -208,7 +208,9 @@ module.exports = function (webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: 'static/js/widget.js',
+      filename: isEnvProduction
+        ? 'static/js/widget.js'
+        : isEnvDevelopment && 'static/js/bundle.js',
       // filename: isEnvProduction
       //   ? "static/js/[name].[contenthash:8].js"
       //   : isEnvDevelopment && "static/js/bundle.js",
@@ -565,6 +567,9 @@ module.exports = function (webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
+      new webpack.optimize.LimitChunkCountPlugin({
+        maxChunks: 1,
+      }),
       new HtmlWebpackPlugin(
         Object.assign(
           {},
