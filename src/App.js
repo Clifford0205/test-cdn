@@ -3,6 +3,7 @@ import './App.css';
 import { IconButton, Popover, Toolbar, AppBar } from '@mui/material';
 import icon from './ic_widjet.svg';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Test from './pages/test.jsx';
 
 function App() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,7 +20,6 @@ function App() {
   const id = open ? 'simple-popover' : undefined;
   return (
     <>
-      <ConnectButton />
       <IconButton
         onClick={handleClick}
         style={{ position: 'absolute', left: 20, bottom: 20, zIndex: 5000 }}

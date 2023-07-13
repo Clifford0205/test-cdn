@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React, { StrictMode } from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
@@ -9,6 +9,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { mainnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 import Frame from 'react-frame-component';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [mainnet],
@@ -28,11 +29,24 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 });
 
-const root = ReactDOM.createRoot(document.getElementsByTagName('body')[0]);
-root.render(
-  <WagmiConfig config={wagmiConfig}>
-    <RainbowKitProvider chains={chains}>
-      <App />
-    </RainbowKitProvider>
-  </WagmiConfig>
+// const rootElement = ReactDOM.createRoot(
+//   document.getElementsByTagName('body')[0]
+// );
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('No root element found in your index.html');
+}
+// root.render(
+//   <WagmiConfig config={wagmiConfig}>
+//     <RainbowKitProvider chains={chains}>
+//       <Component />
+//     </RainbowKitProvider>
+//   </WagmiConfig>
+// );
+
+ReactDOM.render(
+  <Frame>
+    <App />
+  </Frame>,
+  rootElement
 );
