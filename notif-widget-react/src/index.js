@@ -32,7 +32,7 @@ const wagmiConfig = createConfig({
 // const rootElement = ReactDOM.createRoot(
 //   document.getElementsByTagName('body')[0]
 // );
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('widget');
 if (!rootElement) {
   throw new Error('No root element found in your index.html');
 }

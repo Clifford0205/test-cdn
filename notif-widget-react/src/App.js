@@ -3,7 +3,6 @@ import './App.css';
 import { IconButton, Popover, Toolbar, AppBar } from '@mui/material';
 import icon from './ic_widjet.svg';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import Test from './pages/test.jsx';
 
 function App() {
   const [anchorEl, setAnchorEl] = React.useState(null);
