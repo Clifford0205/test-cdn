@@ -1,11 +1,21 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { IconButton, Popover, Toolbar, AppBar } from '@mui/material';
 import icon from './ic_widjet.svg';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
+import { setFrameSize } from 'SRC/index';
+import {
+  FRAME_OPENED,
+  FRAME_CLOSED,
+  FRAME_HEIGHT_VIEWPORT,
+} from 'SRC/constants/iframeSizes';
 
 function App() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const widgetElement = document.getElementById('meta-crm-widget');
+  const size = useWindowSize();
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -15,8 +25,20 @@ function App() {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  useEffect(() => {
+    if (anchorEl) {
+      if (size.height > FRAME_HEIGHT_VIEWPORT[1]) {
+        setFrameSize(widgetElement, FRAME_OPENED);
+      } else if (size.height < FRAME_HEIGHT_VIEWPORT[0]) {
+        setFrameSize(widgetElement, [350, 380]);
+      } else {
+        setFrameSize(widgetElement, [350, size.height]);
+      }
+    } else {
+      setFrameSize(widgetElement, FRAME_CLOSED);
+    }
+  }, [anchorEl, size.height]);
+
   return (
     <>
       <IconButton

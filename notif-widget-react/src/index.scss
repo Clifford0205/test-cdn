@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+.meta-crm-widget-container {
+  iframe.meta-crm-widget {
+    opacity: 1;
+    min-height: 0;
+    min-width: 0;
+    border: 0;
+    position: fixed;
+    z-index: 1000010;
+    overflow: hidden;
+    bottom: 0;
+    left: 0;
+  }
+}
