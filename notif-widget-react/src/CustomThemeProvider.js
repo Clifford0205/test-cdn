@@ -20,9 +20,7 @@ const CustomThemeProvider = props => {
     },
   });
 
-  const newTheme = () => {
-    return Object.assign({}, theme, widgetTheme);
-  };
+  const newTheme = Object.assign({}, theme, widgetTheme);
 
   return (
     <ColorModeContext.Provider value={colorModeHooksValue}>

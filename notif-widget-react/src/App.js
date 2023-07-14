@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { IconButton, Popover, Toolbar, AppBar } from '@mui/material';
+import { get } from 'lodash-es';
 import icon from './ic_widjet.svg';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
 import { setFrameSize } from 'SRC/index';
@@ -10,12 +11,45 @@ import {
   FRAME_HEIGHT_VIEWPORT,
 } from 'SRC/constants/iframeSizes';
 
-function App() {
+function App({ parentWindow }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [address, setAddress] = useState(null);
   const widgetElement = document.getElementById('meta-crm-widget');
   const size = useWindowSize();
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const onInit = async () => {
+    if (!get(parentWindow, 'ethereum')) {
+      return;
+    }
+    try {
+      await parentWindow.ethereum.enable();
+      const accounts = await parentWindow.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
+      setAddress(accounts[0]);
+      parentWindow.ethereum.on('accountsChanged', function (accounts) {
+        try {
+          // Time to reload your interface with accounts[0]!
+          setAddress(accounts[0]);
+        } catch (error) {
+          setAddress(null);
+          console.error(
+            'An error occurred in the accountsChanged event handler:',
+            error
+          );
+        }
+      });
+    } catch (error) {
+      console.error('An error occurred:', error);
+      setAddress(null);
+    }
+  };
+
+  useEffect(() => {
+    onInit();
+  }, []);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -64,6 +98,7 @@ function App() {
         <div style={{ height: 520, overflow: 'auto', width: 320 }}>
           <AppBar position="static">
             <Toolbar>Notifications</Toolbar>
+            <div>address:{address}</div>
           </AppBar>
         </div>
       </Popover>

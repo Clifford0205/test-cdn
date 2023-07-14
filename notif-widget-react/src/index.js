@@ -43,7 +43,7 @@ const CustomHead = props => {
   return (
     <>
       <meta charSet="utf-8" />
-      <title>Previewer</title>
+      <title>MetaCRM widget</title>
       <meta name="viewport" content="width=device-width,initial-scale=1" />
       <base target="_parent" />
       <link
@@ -56,6 +56,8 @@ const CustomHead = props => {
 
 const AppFrameComponent = props => {
   const iframeRef = useRef(null);
+  console.log('widget out window', window);
+  const parentWindow = window;
 
   return (
     <Frame
@@ -74,7 +76,7 @@ const AppFrameComponent = props => {
           return (
             <CacheProvider value={cache}>
               <CustomThemeProvider>
-                <App />
+                <App parentWindow={parentWindow} />
               </CustomThemeProvider>
             </CacheProvider>
           );
