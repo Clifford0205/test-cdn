@@ -9,7 +9,6 @@ import useColorMode from '@metacrm/metacrm-material-ui/dist/hooks/useColorMode.h
 
 const CustomThemeProvider = props => {
   const { colorModeHooksValue, theme } = useColorMode();
-  console.log('theme: ', theme);
   const { toggleColorMode, mode } = colorModeHooksValue;
 
   return (
