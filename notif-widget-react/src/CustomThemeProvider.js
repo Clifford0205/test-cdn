@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import { ThemeProvider } from "@material-ui/core/styles";
 import { CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 
 import _ from 'lodash';
 
@@ -11,9 +12,21 @@ const CustomThemeProvider = props => {
   const { colorModeHooksValue, theme } = useColorMode();
   const { toggleColorMode, mode } = colorModeHooksValue;
 
+  const widgetTheme = createTheme({
+    palette: {
+      background: {
+        default: 'unset',
+      },
+    },
+  });
+
+  const newTheme = () => {
+    return Object.assign({}, theme, widgetTheme);
+  };
+
   return (
     <ColorModeContext.Provider value={colorModeHooksValue}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={newTheme}>
         <CssBaseline />
         {props.children}
       </ThemeProvider>
