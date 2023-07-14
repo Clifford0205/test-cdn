@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
-import { IconButton, Popover, Toolbar, AppBar } from '@mui/material';
+import { Popover } from '@mui/material';
+import { IconButton, SIZE } from '@metacrm/metacrm-material-ui/dist/Button';
 import { get } from 'lodash-es';
 import icon from './ic_widjet.svg';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
@@ -10,6 +11,7 @@ import {
   FRAME_CLOSED,
   FRAME_HEIGHT_VIEWPORT,
 } from 'SRC/constants/iframeSizes';
+import PopoverContentContainer from 'SRC/components/PopoverContentContainer/PopoverContentContainer';
 
 function App({ parentWindow }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -77,7 +79,7 @@ function App({ parentWindow }) {
     <>
       <IconButton
         onClick={handleClick}
-        style={{ position: 'absolute', left: 20, bottom: 20, zIndex: 5000 }}
+        sx={{ position: 'absolute', bottom: '10px', left: '10px' }}
       >
         <img src={icon} style={{ width: 60, height: 60 }} />
       </IconButton>
@@ -94,13 +96,9 @@ function App({ parentWindow }) {
           vertical: 'bottom',
           horizontal: 'left',
         }}
+        hideBackdrop
       >
-        <div style={{ height: 520, overflow: 'auto', width: 320 }}>
-          <AppBar position="static">
-            <Toolbar>Notifications</Toolbar>
-            <div>address:{address}</div>
-          </AppBar>
-        </div>
+        <PopoverContentContainer />
       </Popover>
     </>
   );
