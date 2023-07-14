@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyledPopoverContentContainer } from './PopoverContentContainer.styles';
+
 import PopoverHeader from '../PopoverHeader/PopoverHeader';
 
+import { StyledPopoverContentContainer } from './PopoverContentContainer.styles';
+
 function PopoverContentContainer() {
-  return (
-    <StyledPopoverContentContainer>
-      <PopoverHeader></PopoverHeader>
-    </StyledPopoverContentContainer>
-  );
+	return (
+		<StyledPopoverContentContainer>
+			<PopoverHeader />
+		</StyledPopoverContentContainer>
+	);
 }
 
 export default PopoverContentContainer;
