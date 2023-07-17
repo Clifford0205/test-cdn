@@ -8,7 +8,9 @@ const StyledPopoverContentContainer = styled('div', {
 	overflowY: 'auto',
 	height: '100%',
 	width: '320px',
-	minHeight: '564px',
+	display: 'flex',
+	flexDirection: 'column',
+	// minHeight: '564px',
 }));
 
 export { StyledPopoverContentContainer };

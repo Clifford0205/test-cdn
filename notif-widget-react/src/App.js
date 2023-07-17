@@ -7,6 +7,7 @@ import { Popover } from '@mui/material';
 import { get } from 'lodash-es';
 import PropTypes from 'prop-types';
 
+import { StyledPopover } from './App.styles';
 import icon from './ic_widjet.svg';
 
 import PopoverContentContainer from 'SRC/components/PopoverContentContainer/PopoverContentContainer';
@@ -78,7 +79,7 @@ function App({ parentWindow }) {
 			<IconButton onClick={handleClick} sx={{ position: 'absolute', bottom: '10px', left: '10px' }}>
 				<img src={icon} style={{ width: 60, height: 60 }} alt='widget-open-icon' />
 			</IconButton>
-			<Popover
+			<StyledPopover
 				id={id}
 				open={open}
 				anchorEl={anchorEl}
@@ -94,7 +95,7 @@ function App({ parentWindow }) {
 				hideBackdrop
 			>
 				<PopoverContentContainer onClose={handleClose} />
-			</Popover>
+			</StyledPopover>
 		</>
 	);
 }

@@ -32,7 +32,7 @@ function PopoverHeader({ onClose }) {
 
 				<StyledEndSlot>
 					<IconButton onClick={onClose}>
-						<HighlightOffIcon />
+						<i className='font-icon-ic_x_circle font-size-20' />
 					</IconButton>
 				</StyledEndSlot>
 			</StyledHeader>

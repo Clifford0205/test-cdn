@@ -11,23 +11,11 @@ function CustomThemeProvider(props) {
 	const { colorModeHooksValue, theme } = useColorMode();
 	const { toggleColorMode, mode } = colorModeHooksValue;
 
-	const widgetTheme = createTheme({
-		typography: {
-			fontSize: 14 * 0.875,
-			htmlFontSize: 16,
-		},
-		palette: {
-			background: {
-				default: 'unset',
-			},
-		},
-	});
-
-	const newTheme = { ...theme, ...widgetTheme };
+	theme.palette.background.default = 'unset';
 
 	return (
 		<ColorModeContext.Provider value={colorModeHooksValue}>
-			<ThemeProvider theme={newTheme}>
+			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				{props.children}
 			</ThemeProvider>

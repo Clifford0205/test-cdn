@@ -12,7 +12,8 @@ const StyledHeaderContainer = styled('div', {
 	width: '100%',
 	borderBottom: `1px solid ${theme.customColors.grey[400]}`,
 	display: 'flex',
-	padding: '13px 16px',
+	padding: '11.5px 16px',
+	height: '48px',
 }));
 
 const StyledHeader = styled('div', {
