@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Toolbar, AppBar, useTheme } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import {
 	StyledHeaderContainer,
@@ -13,21 +14,24 @@ import {
 	StyledEndSlot,
 } from './PopoverHeader.styles';
 
-function PopoverHeader() {
+function PopoverHeader({ onClose }) {
 	const theme = useTheme();
 	return (
 		<StyledHeaderContainer>
 			<StyledHeader>
 				<StyledStartSlot>
-					<StyledStartSlotButton size={SIZE.XS} variant={VARIANT.OUTLINED}>
+					<StyledStartSlotButton
+						startIcon={<i className='font-icon-ic_settingLine font-size-16' />}
+						size={SIZE.XS}
+						variant={VARIANT.OUTLINED}
+					>
 						Setting
 					</StyledStartSlotButton>
 				</StyledStartSlot>
-				<i className='font-icon-ic_settingLine font-size-32' />
 				<StyledCenterText>Get Notified</StyledCenterText>
 
 				<StyledEndSlot>
-					<IconButton>
+					<IconButton onClick={onClose}>
 						<HighlightOffIcon />
 					</IconButton>
 				</StyledEndSlot>
@@ -35,5 +39,13 @@ function PopoverHeader() {
 		</StyledHeaderContainer>
 	);
 }
+
+PopoverHeader.propTypes = {
+	onClose: PropTypes.func,
+};
+
+PopoverHeader.defaultProps = {
+	onClose: () => {},
+};
 
 export default PopoverHeader;

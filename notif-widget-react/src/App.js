@@ -93,7 +93,7 @@ function App({ parentWindow }) {
 				}}
 				hideBackdrop
 			>
-				<PopoverContentContainer />
+				<PopoverContentContainer onClose={handleClose} />
 			</Popover>
 		</>
 	);
