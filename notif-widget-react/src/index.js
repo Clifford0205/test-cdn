@@ -1,12 +1,16 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useRef, StrictMode } from 'react';
+import React, { useRef, StrictMode, useEffect } from 'react';
 
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
+
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/order, import/no-unresolved
+import Stylesheet from '!!raw-loader!@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
+import '@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
+
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
-import '@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
 
 import './index.css';
 import './index.scss';
@@ -42,9 +46,6 @@ const rootElement = document.getElementById('widget');
 //     </RainbowKitProvider>
 //   </WagmiConfig>
 // );
-console.log('document.head: ', document.head);
-
-const initialContent = `<!DOCTYPE html><html><head>${document.head.innerHTML}</head><body><div></div></body></html>`;
 
 function CustomHead(props) {
 	return (
@@ -57,23 +58,37 @@ function CustomHead(props) {
 				rel='stylesheet'
 				href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
 			/>
+			{/* TODO 可以再想想看 應該是 src: url 路徑問題 */}
+			{/* <style>{Stylesheet}</style> */}
 		</>
 	);
 }
 
 function AppFrameComponent(props) {
 	const iframeRef = useRef(null);
-	console.log('widget out window', window);
 	const parentWindow = window;
 
+	useEffect(() => {
+		const iframe = iframeRef.current;
+
+		function handleLoad() {
+			const headNode = iframe?.contentWindow?.document?.head;
+
+			if (headNode) {
+				const originalHTML = headNode.innerHTML;
+				const newHTML = document.head.innerHTML;
+				headNode.innerHTML = originalHTML + newHTML;
+			}
+		}
+
+		iframe.addEventListener('load', handleLoad);
+
+		// 移除監聽
+		return () => iframe.removeEventListener('load', handleLoad);
+	}, []);
+
 	return (
-		<Frame
-			initialContent={`<!DOCTYPE html><html><head></head><body><div id="mountHere"></div></body></html>`}
-			className='meta-crm-widget'
-			id='meta-crm-widget'
-			head={<CustomHead />}
-			ref={iframeRef}
-		>
+		<Frame className='meta-crm-widget' id='meta-crm-widget' head={<CustomHead />} ref={iframeRef}>
 			<FrameContextConsumer>
 				{({ document, window }) => {
 					const cache = createCache({
