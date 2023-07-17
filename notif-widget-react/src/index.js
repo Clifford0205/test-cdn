@@ -6,6 +6,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
+import '@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
 
 import './index.css';
 import './index.scss';
@@ -41,6 +42,9 @@ const rootElement = document.getElementById('widget');
 //     </RainbowKitProvider>
 //   </WagmiConfig>
 // );
+console.log('document.head: ', document.head);
+
+const initialContent = `<!DOCTYPE html><html><head>${document.head.innerHTML}</head><body><div></div></body></html>`;
 
 function CustomHead(props) {
 	return (
@@ -63,7 +67,13 @@ function AppFrameComponent(props) {
 	const parentWindow = window;
 
 	return (
-		<Frame className='meta-crm-widget' id='meta-crm-widget' head={<CustomHead />} ref={iframeRef}>
+		<Frame
+			initialContent={`<!DOCTYPE html><html><head></head><body><div id="mountHere"></div></body></html>`}
+			className='meta-crm-widget'
+			id='meta-crm-widget'
+			head={<CustomHead />}
+			ref={iframeRef}
+		>
 			<FrameContextConsumer>
 				{({ document, window }) => {
 					const cache = createCache({

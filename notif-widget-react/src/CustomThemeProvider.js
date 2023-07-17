@@ -12,6 +12,10 @@ function CustomThemeProvider(props) {
 	const { toggleColorMode, mode } = colorModeHooksValue;
 
 	const widgetTheme = createTheme({
+		typography: {
+			fontSize: 14 * 0.875,
+			htmlFontSize: 16,
+		},
 		palette: {
 			background: {
 				default: 'unset',
