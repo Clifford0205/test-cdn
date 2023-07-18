@@ -8,7 +8,7 @@ const drawerWidth = 510;
 const StyledPopover = styled(Popover, {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
-	'& .MuiPaper-root': {
+	'&>.MuiPaper-root': {
 		height: '90%',
 		overflow: 'unset',
 		maxWidth: '320px',
