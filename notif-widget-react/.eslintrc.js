@@ -24,12 +24,7 @@ module.exports = {
 		'react/jsx-props-no-spreading': 'off',
 		'react/destructuring-assignment': 'off',
 		'no-unused-vars': 'warn',
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				devDependencies: true,
-			},
-		],
+
 		'import/order': [
 			'error',
 			{
@@ -52,6 +47,7 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'react/jsx-no-useless-fragment': 'off',
 		'import/no-cycle': 'off',
+		'react/no-array-index-key': 'off',
 		'import/no-extraneous-dependencies': 'off',
 	},
 	settings: {

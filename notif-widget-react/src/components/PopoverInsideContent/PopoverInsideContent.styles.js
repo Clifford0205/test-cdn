@@ -8,11 +8,23 @@ const StyledInsideContentContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	flex: 1,
+	overflowY: 'auto',
+	boxSizing: 'border-box',
+	'&::-webkit-scrollbar': {
+		width: '3px',
+	},
+	'&::-webkit-scrollbar-track': {
+		background: '#f1f1f1',
+	},
+	'&::-webkit-scrollbar-thumb': {
+		background: '#888',
+	},
+	'&::-webkit-scrollbar-thumb:hover': {
+		background: '#555',
+	},
 }));
 
-const StyledNoConnect = styled('div', {
-	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({
+const noContentMixin = (theme) => ({
 	width: '100%',
 	height: '100%',
 	display: 'flex',
@@ -20,6 +32,23 @@ const StyledNoConnect = styled('div', {
 	alignItems: 'center',
 	justifyContent: 'center',
 	fontSize: '12px',
+});
+
+const StyledNoConnect = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	...noContentMixin(theme),
 }));
 
-export { StyledInsideContentContainer, StyledNoConnect };
+const StyledNoNotification = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	...noContentMixin(theme),
+
+	'& i': {
+		fontSize: '46px',
+		color: theme.customColors.grey[700],
+	},
+}));
+
+export { StyledInsideContentContainer, StyledNoConnect, StyledNoNotification };
