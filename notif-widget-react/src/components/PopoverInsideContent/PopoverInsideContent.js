@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import NotificationDetailPage from '../NotificationDetailPage/NotificationDetailPage';
 import NotificationPage from '../NotificationPage/NotificationPage';
+import SubscribeSuccessPage from '../SubscribeSuccessPage/SubscribeSuccessPage';
 
 import {
 	StyledInsideContentContainer,
@@ -40,7 +41,11 @@ function PopoverInsideContent() {
 
 	const renderNotificationDetailPage = () => <NotificationDetailPage />;
 
-	return <StyledInsideContentContainer>{renderNotificationPage()}</StyledInsideContentContainer>;
+	const renderSubscribeSuccessPage = () => <SubscribeSuccessPage />;
+
+	return (
+		<StyledInsideContentContainer>{renderSubscribeSuccessPage()}</StyledInsideContentContainer>
+	);
 }
 
 PopoverInsideContent.propTypes = {};

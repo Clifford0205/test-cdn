@@ -14,7 +14,7 @@ import SubscribeDrawer from '../SubscribeDrawer/SubscribeDrawer';
 import { StyledPopoverContentContainer } from './PopoverContentContainer.styles';
 
 function PopoverContentContainer({ onClose }) {
-	const [drawerOpen, setDrawerOpen] = useState(true);
+	const [drawerOpen, setDrawerOpen] = useState(false);
 	const theme = useTheme();
 
 	const handleCloseSubscribeDrawer = () => {

@@ -12,6 +12,7 @@ const StyledPopover = styled(Popover, {
 		height: '90%',
 		overflow: 'unset',
 		maxWidth: '320px',
+		minWidth: '320px',
 		maxHeight: '570px',
 	},
 }));
