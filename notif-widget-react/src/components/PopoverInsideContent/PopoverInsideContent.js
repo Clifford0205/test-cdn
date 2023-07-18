@@ -7,6 +7,7 @@ import { Toolbar, AppBar, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 
+import NotificationDetailPage from '../NotificationDetailPage/NotificationDetailPage';
 import NotificationPage from '../NotificationPage/NotificationPage';
 
 import {
@@ -37,7 +38,11 @@ function PopoverInsideContent() {
 
 	const renderNotificationPage = () => <NotificationPage />;
 
-	return <StyledInsideContentContainer>{renderNotificationPage()}</StyledInsideContentContainer>;
+	const renderNotificationDetailPage = () => <NotificationDetailPage />;
+
+	return (
+		<StyledInsideContentContainer>{renderNotificationDetailPage()}</StyledInsideContentContainer>
+	);
 }
 
 PopoverInsideContent.propTypes = {};

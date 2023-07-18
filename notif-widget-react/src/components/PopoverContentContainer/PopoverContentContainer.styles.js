@@ -6,7 +6,7 @@ const StyledPopoverContentContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	height: '100%',
-	width: '320px',
+	// width: '320px',
 	display: 'flex',
 	flexDirection: 'column',
 	// minHeight: '564px',

@@ -9,8 +9,10 @@ const StyledPopover = styled(Popover, {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	'& .MuiPaper-root': {
-		height: '100%',
+		height: '90%',
 		overflow: 'unset',
+		maxWidth: '320px',
+		maxHeight: '570px',
 	},
 }));
 

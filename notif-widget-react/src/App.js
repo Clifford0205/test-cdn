@@ -65,9 +65,9 @@ function App({ parentWindow }) {
 			if (size.height > FRAME_HEIGHT_VIEWPORT[1]) {
 				setFrameSize(widgetElement, FRAME_OPENED);
 			} else if (size.height < FRAME_HEIGHT_VIEWPORT[0]) {
-				setFrameSize(widgetElement, [350, 380]);
+				setFrameSize(widgetElement, [400, 380]);
 			} else {
-				setFrameSize(widgetElement, [350, size.height]);
+				setFrameSize(widgetElement, [400, size.height]);
 			}
 		} else {
 			setFrameSize(widgetElement, FRAME_CLOSED);
