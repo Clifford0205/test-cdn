@@ -1898,10 +1898,10 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@metacrm/metacrm-material-ui@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.npmjs.org/@metacrm/metacrm-material-ui/-/metacrm-material-ui-0.1.6.tgz"
-  integrity sha512-ThUgWCl8C1WI2Y+KQAgj1BBCg5LsYeEzEVp+QuSrCHCnb0I8P/H5S6Ud0KF3bfhyt6Oefz6S97qOvm/MAxfebQ==
+"@metacrm/metacrm-material-ui@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@metacrm/metacrm-material-ui/-/metacrm-material-ui-0.1.7.tgz#fa80cee2d5d3f871a7fe94023f598b309d4aef2c"
+  integrity sha512-1wOHUDoMvzilsIJL1hiaj99DqWklKntCoegqzcaJGg9NwI2ZochbjDM+7EOM7AFAs5VjO94gz2Fn2c97b2jg6Q==
   dependencies:
     "@babel/eslint-parser" "^7.21.8"
     "@emotion/react" "^11.11.0"

@@ -23,7 +23,7 @@ function PopoverHeader({ onClose }) {
 					<StyledStartSlotButton
 						startIcon={<i className='font-icon-ic_settingLine font-size-16' />}
 						size={SIZE.XS}
-						variant={VARIANT.OUTLINED}
+						variant={VARIANT.SHADOW}
 					>
 						Setting
 					</StyledStartSlotButton>

@@ -6,7 +6,7 @@
     "@babel/core": "^7.16.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@metacrm/metacrm-material-ui": "^0.1.6",
+    "@metacrm/metacrm-material-ui": "^0.1.7",
     "@metacrm/metacrm-svg": "^1.0.20",
     "@mui/icons-material": "^5.14.0",
     "@mui/material": "^5.13.7",

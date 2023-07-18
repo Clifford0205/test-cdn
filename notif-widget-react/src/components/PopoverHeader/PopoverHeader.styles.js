@@ -43,14 +43,7 @@ const StyledStartSlot = styled('div', {
 
 const StyledStartSlotButton = styled(Button, {
 	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({
-	color: theme.customColors.grey[700],
-	border: `1px solid ${theme.customColors.grey[700]}`,
-	padding: '2px 8px',
-	'&:hover': {
-		border: `1px solid ${theme.customColors.grey[700]}`,
-	},
-}));
+})(({ theme }) => ({}));
 
 const StyledEndSlot = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
