@@ -42,17 +42,23 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 						Resubscribe
 					</Button>
 				</StyledSubscribeAreaContainer>
-				<StyledReceivedByOtherwayContainer>
+				{/* <StyledReceivedByOtherwayContainer>
 					<StyledReceivedByOtherwayGuideText>
 						你還可以透過以下渠道接收優惠訊息與公告。
 					</StyledReceivedByOtherwayGuideText>
-					<Box sx={{ textAlign: 'center', marginBottom: '14px' }}>
-						<IconButton color={theme.customColors.grey[700]} sx={{ mx: '13px' }}>
+					<Box
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							marginBottom: '14px',
+						}}
+					>
+						<Box color={theme.customColors.grey[700]} sx={{ mx: '13px' }}>
 							<i className='font-icon-ic_email font-size-32' />
-						</IconButton>
-						<IconButton color={theme.customColors.grey[700]} sx={{ mx: '13px' }}>
+						</Box>
+						<Box color={theme.customColors.grey[700]} sx={{ mx: '13px' }}>
 							<i className='font-icon-ic_discord font-size-32' />
-						</IconButton>
+						</Box>
 					</Box>
 					<Button fullWidth color={COLOR.SECONDARY} sx={{ marginBottom: '5px' }}>
 						Learn more
@@ -65,7 +71,7 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 					>
 						Later
 					</StyledLaterButton>
-				</StyledReceivedByOtherwayContainer>
+				</StyledReceivedByOtherwayContainer> */}
 			</Box>
 		</StyledDrawer>
 	);

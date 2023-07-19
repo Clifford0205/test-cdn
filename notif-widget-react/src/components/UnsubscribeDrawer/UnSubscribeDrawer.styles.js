@@ -30,40 +30,31 @@ export const StyledDrawer = styled(Drawer, {
 	},
 }));
 
-export const StyledSubscribeAreaContainer = styled('div', {
+export const StyledUnsubscribeAreaContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
-	paddingBottom: '20px',
+	paddingBottom: '7px',
 	// borderBottom: `1px dashed ${theme.customColors.grey[400]}`,
 }));
 
-export const StyledSubscribeAreaGuideText = styled('div', {
+export const StyledUnSubscribeAreaGuideText = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	fontSize: '12px',
-	textAlign: 'center',
 	marginBottom: '12px',
 }));
 
-export const StyledReceivedByOtherwayContainer = styled('div', {
+export const StyledUnSubscribeCheckArea = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({
-	paddingTop: '20px',
-}));
+})(({ theme }) => ({}));
 
-export const StyledReceivedByOtherwayGuideText = styled('div', {
-	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({
-	fontSize: '12px',
-	textAlign: 'center',
-	marginBottom: '12px',
-}));
-
-export const StyledLaterButton = styled(Button, {
+export const StyledSingleNotifyWay = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	color: theme.customColors.grey[700],
-	'&:hover': {
-		color: theme.customColors.grey[700],
+	display: 'flex',
+	alignItems: 'center',
+	'& i': {
+		marginRight: '6px',
 	},
 }));

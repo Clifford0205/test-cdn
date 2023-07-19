@@ -25,7 +25,7 @@ function PopoverContentContainer({ onClose }) {
 		<StyledPopoverContentContainer>
 			<PopoverHeader onClose={onClose} />
 			<PopoverInsideContent />
-			<PopoverFooter />
+			{/* <PopoverFooter /> */}
 			<SubscribeDrawer
 				onDrawerOpen={drawerOpen}
 				onHandleCloseSubscribeDrawer={handleCloseSubscribeDrawer}

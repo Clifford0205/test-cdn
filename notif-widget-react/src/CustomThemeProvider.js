@@ -12,10 +12,19 @@ function CustomThemeProvider(props) {
 	const { toggleColorMode, mode } = colorModeHooksValue;
 
 	theme.palette.background.default = 'unset';
+	theme.typography.fontFamily = '"Inter"';
+
+	const newThemeSetting = {
+		...theme,
+		palette: { ...theme.palette, background: { default: 'unset' } },
+		typography: { ...theme.typography, fontFamily: '"Inter"' },
+	};
+
+	const newTheme = createTheme(newThemeSetting);
 
 	return (
 		<ColorModeContext.Provider value={colorModeHooksValue}>
-			<ThemeProvider theme={theme}>
+			<ThemeProvider theme={newTheme}>
 				<CssBaseline />
 				{props.children}
 			</ThemeProvider>

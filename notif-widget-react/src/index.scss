@@ -1,22 +1,22 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  height: 100vh;
-  background: gainsboro;
+	height: 100vh;
+	background: gainsboro;
 }
 
 .meta-crm-widget-container {
-  iframe.meta-crm-widget {
-    opacity: 1;
-    min-height: 0;
-    min-width: 0;
-    border: 0;
-    position: fixed;
-    z-index: 1000010;
-    overflow: hidden;
-    bottom: 0;
-    left: 0;
-  }
+	iframe.meta-crm-widget {
+		opacity: 1;
+		min-height: 0;
+		min-width: 0;
+		border: 0;
+		position: fixed;
+		z-index: 1000010;
+		overflow: hidden;
+		bottom: 0;
+		left: 0;
+	}
 }

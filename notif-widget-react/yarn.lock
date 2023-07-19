@@ -1898,10 +1898,10 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@metacrm/metacrm-material-ui@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@metacrm/metacrm-material-ui/-/metacrm-material-ui-0.1.7.tgz#fa80cee2d5d3f871a7fe94023f598b309d4aef2c"
-  integrity sha512-1wOHUDoMvzilsIJL1hiaj99DqWklKntCoegqzcaJGg9NwI2ZochbjDM+7EOM7AFAs5VjO94gz2Fn2c97b2jg6Q==
+"@metacrm/metacrm-material-ui@^0.1.9":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@metacrm/metacrm-material-ui/-/metacrm-material-ui-0.1.9.tgz#34c091048f059acfe4d52ffa637f28c751324eed"
+  integrity sha512-sNYA+5NRn3Ux9Akycky1bNQ+ghaWj8XTgaXFbmfq8KjQlRD8pzo5iGH2H+9605aIPRgWUB1aiMODtymsLfqXOg==
   dependencies:
     "@babel/eslint-parser" "^7.21.8"
     "@emotion/react" "^11.11.0"
@@ -1931,10 +1931,10 @@
     styled-components "^6.0.0-rc.3"
     web-vitals "^2.1.4"
 
-"@metacrm/metacrm-svg@^1.0.20":
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/@metacrm/metacrm-svg/-/metacrm-svg-1.0.20.tgz#5d1f3af79f05980793bc8c94059f7e0847310bf0"
-  integrity sha512-kMGmL6yZhaxQiFxRgFh1qrpGOq8JbSkNDlQKEzBT8I/RCY+hbphWmTTw8ltb92zkpSkIBVfUuOGxLKYXab5oKg==
+"@metacrm/metacrm-svg@^1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/@metacrm/metacrm-svg/-/metacrm-svg-1.0.23.tgz#8799b3b1e11f6e558f70b2394d06fb8b41aaf104"
+  integrity sha512-vcq+QVjmOv+IaF5su0U/gl/K+hJbMJjuKTlElKclDl3a74WNv+TiTRCqD83bjUWwDokreM6L277sLx0hNZfD0w==
   dependencies:
     "@emotion/react" "^11.11.0"
     "@emotion/styled" "^11.11.0"
