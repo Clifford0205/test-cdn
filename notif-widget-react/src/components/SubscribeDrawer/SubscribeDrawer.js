@@ -9,6 +9,7 @@ import {
 	StyledDrawer,
 	StyledSubscribeAreaContainer,
 	StyledSubscribeAreaGuideText,
+	StyledReSubscribeButton,
 	StyledReceivedByOtherwayContainer,
 	StyledReceivedByOtherwayGuideText,
 	StyledLaterButton,
@@ -38,12 +39,12 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 					<StyledSubscribeAreaGuideText>
 						開啟小鈴鐺，直接在此接收管理重要訊息。
 					</StyledSubscribeAreaGuideText>
-					<Button fullWidth color={COLOR.SECONDARY} variant={VARIANT.OUTLINED}>
-						Resubscribe
-					</Button>
+					<StyledReSubscribeButton fullWidth color={COLOR.SECONDARY} variant={VARIANT.OUTLINED}>
+						<i className='font-icon-ic_bell font-size-18' /> Resubscribe
+					</StyledReSubscribeButton>
 				</StyledSubscribeAreaContainer>
-				{/* <StyledReceivedByOtherwayContainer>
-					<StyledReceivedByOtherwayGuideText>
+				<StyledReceivedByOtherwayContainer>
+					{/* <StyledReceivedByOtherwayGuideText>
 						你還可以透過以下渠道接收優惠訊息與公告。
 					</StyledReceivedByOtherwayGuideText>
 					<Box
@@ -62,7 +63,7 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 					</Box>
 					<Button fullWidth color={COLOR.SECONDARY} sx={{ marginBottom: '5px' }}>
 						Learn more
-					</Button>
+					</Button> */}
 					<StyledLaterButton
 						fullWidth
 						variant={VARIANT.TEXT}
@@ -71,7 +72,7 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 					>
 						Later
 					</StyledLaterButton>
-				</StyledReceivedByOtherwayContainer> */}
+				</StyledReceivedByOtherwayContainer>
 			</Box>
 		</StyledDrawer>
 	);

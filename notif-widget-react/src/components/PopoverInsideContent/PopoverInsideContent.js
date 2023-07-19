@@ -46,7 +46,7 @@ function PopoverInsideContent() {
 
 	const renderSettingPage = () => <SettingPage />;
 
-	return <StyledInsideContentContainer>{renderSettingPage()}</StyledInsideContentContainer>;
+	return <StyledInsideContentContainer>{renderNotificationPage()}</StyledInsideContentContainer>;
 }
 
 PopoverInsideContent.propTypes = {};

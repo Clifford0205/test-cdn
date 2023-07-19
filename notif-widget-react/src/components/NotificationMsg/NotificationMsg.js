@@ -31,7 +31,10 @@ function NotificationMsg() {
 					<StyledNotificationInfoText>
 						NConfirmations Confirmations Confir metaCRM NConfirmations Confirmations Confir metaCRM
 					</StyledNotificationInfoText>
-					<StyledNotificationTime>19:12</StyledNotificationTime>
+					<StyledNotificationTime>
+						<i className='font-icon-ic_clock font-size-12' />
+						19:12
+					</StyledNotificationTime>
 				</StyledNotificationInfo>
 			</StyledNotificationContent>
 			<StyledArrow>

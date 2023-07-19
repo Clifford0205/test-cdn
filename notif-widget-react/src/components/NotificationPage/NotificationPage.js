@@ -14,6 +14,7 @@ import {
 	StyledAnnounce,
 	StyledAnnounceTitle,
 	StyledAnnounceContent,
+	StyledRedDot,
 } from './NotificationPage.styles';
 
 const numbers = [1, 2, 3, 4, 5];
@@ -23,6 +24,7 @@ function NotificationPage() {
 		<>
 			<StyledAnnounceContainer>
 				<StyledAnnounce>
+					<StyledRedDot />
 					<StyledAnnounceTitle>Arbitrum x Radiant x Chainkink</StyledAnnounceTitle>
 					<StyledAnnounceContent>
 						Join Isaac,Radiant’s Director of Communications,next Tuesday,5.2.202 Join

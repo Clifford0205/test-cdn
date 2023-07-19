@@ -12,6 +12,10 @@ export const StyledNotificationMsgContainer = styled(Box, {
 	alignItems: 'center',
 	padding: '14px 16px',
 	borderBottom: `1px solid ${theme.customColors.grey[400]}`,
+	'&:hover': {
+		backgroundColor: theme.customColors.purple[300],
+		cursor: 'pointer',
+	},
 }));
 
 export const StyledRedDotContainer = styled('div', {
@@ -68,7 +72,12 @@ export const StyledNotificationInfoText = styled('div', {
 
 export const StyledNotificationTime = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({}));
+})(({ theme }) => ({
+	display: 'flex',
+	'& i': {
+		marginRight: '3px',
+	},
+}));
 
 export const StyledArrow = styled('div', {
 	shouldForwardProp: isStyledPropsValid,

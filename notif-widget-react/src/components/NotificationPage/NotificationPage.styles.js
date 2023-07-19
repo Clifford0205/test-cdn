@@ -13,10 +13,23 @@ export const StyledAnnounceContainer = styled('div', {
 export const StyledAnnounce = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
+	position: 'relative',
 	borderRadius: '8px',
 	padding: '16px',
 	background:
 		'linear-gradient(197.24deg, #3E4DD2 -0.55%, #5563D4 46.82%, #8088D9 80.24%, #5488C4 113.13%)',
+}));
+
+export const StyledRedDot = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	backgroundColor: '#F62424',
+	height: '8px',
+	width: '8px',
+	borderRadius: '50%',
+	position: 'absolute',
+	top: '-2px',
+	left: '-2px',
 }));
 
 export const StyledAnnounceTitle = styled('div', {

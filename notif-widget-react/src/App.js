@@ -3,11 +3,12 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 import { IconButton, SIZE } from '@metacrm/metacrm-material-ui/dist/Button';
-import { Popover } from '@mui/material';
+import { Popover, useTheme } from '@mui/material';
+import Box from '@mui/material/Box';
 import { get } from 'lodash-es';
 import PropTypes from 'prop-types';
 
-import { StyledPopover } from './App.styles';
+import { StyledPopover, StyledIconButton, StyledRedDot } from './App.styles';
 import icon from './ic_widjet.svg';
 
 import PopoverContentContainer from 'SRC/components/PopoverContentContainer/PopoverContentContainer';
@@ -22,6 +23,7 @@ function App({ parentWindow }) {
 	const size = useWindowSize();
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
+	const theme = useTheme();
 
 	const onInit = async () => {
 		if (!get(parentWindow, 'ethereum')) {
@@ -76,16 +78,20 @@ function App({ parentWindow }) {
 
 	return (
 		<>
-			<IconButton onClick={handleClick} sx={{ position: 'absolute', bottom: '10px', left: '10px' }}>
-				<img src={icon} style={{ width: 60, height: 60 }} alt='widget-open-icon' />
-			</IconButton>
+			<StyledIconButton onClick={handleClick} size={60} color={theme.customColors.grey[700]}>
+				{/* <i className='font-icon-ic_widjet' /> */}
+				<Box position='relative'>
+					<StyledRedDot />
+					<i className='font-icon-ic_widjet_crook' />
+				</Box>
+			</StyledIconButton>
 			<StyledPopover
 				id={id}
 				open={open}
 				anchorEl={anchorEl}
 				onClose={handleClose}
 				anchorOrigin={{
-					vertical: 'top',
+					vertical: -10,
 					horizontal: 'left',
 				}}
 				transformOrigin={{

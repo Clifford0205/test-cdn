@@ -34,7 +34,7 @@ export const StyledSubscribeAreaContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	paddingBottom: '20px',
-	// borderBottom: `1px dashed ${theme.customColors.grey[400]}`,
+	borderBottom: `1px dashed ${theme.customColors.grey[400]}`,
 }));
 
 export const StyledSubscribeAreaGuideText = styled('div', {
@@ -43,6 +43,14 @@ export const StyledSubscribeAreaGuideText = styled('div', {
 	fontSize: '12px',
 	textAlign: 'center',
 	marginBottom: '12px',
+}));
+
+export const StyledReSubscribeButton = styled(Button, {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	'& i': {
+		marginRight: '2px',
+	},
 }));
 
 export const StyledReceivedByOtherwayContainer = styled('div', {
