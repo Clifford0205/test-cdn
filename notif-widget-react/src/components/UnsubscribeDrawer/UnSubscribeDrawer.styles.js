@@ -58,3 +58,55 @@ export const StyledSingleNotifyWay = styled('div', {
 		marginRight: '6px',
 	},
 }));
+
+export const StyledConfirmMsgTitle = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	fontSize: '16px',
+	marginBottom: '12px',
+	fontWeight: theme.fontWeight.MEDIUM,
+	textAlign: 'center',
+}));
+
+export const StyledConfirmMsg = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	marginBottom: '20px',
+	color: theme.customColors.grey[700],
+	fontWeight: theme.fontWeight.MEDIUM,
+	textAlign: 'center',
+}));
+
+export const StyledCloseButton = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	textAlign: 'right',
+	color: theme.customColors.grey[700],
+	marginBottom: '5px',
+}));
+
+export const StyledSuccessUnsubscribeIcon = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	textAlign: 'center',
+	color: theme.customColors.purple[500],
+	marginBottom: '5px',
+}));
+
+export const StyledSuccessUnsubscribeTitle = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	fontSize: '16px',
+	fontWeight: theme.fontWeight.MEDIUM,
+	textAlign: 'center',
+	marginBottom: '12px',
+}));
+
+export const StyledSuccessUnsubscribeText = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	color: theme.customColors.grey[700],
+	textAlign: 'center',
+	fontSize: '12px',
+	padding: '0 40px 36px',
+}));

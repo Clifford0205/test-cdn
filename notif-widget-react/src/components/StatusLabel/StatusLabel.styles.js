@@ -4,6 +4,10 @@ import isStyledPropsValid from 'SRC/utils/isStyledPropsValid';
 
 const colorMap = (theme) => ({
 	primary: { backgroundColor: theme.customColors.blue[200], color: theme.customColors.blue[700] },
+	secondary: {
+		backgroundColor: theme.customColors.purple[300],
+		color: theme.customColors.purple[600],
+	},
 	error: { backgroundColor: theme.customColors.pink[100], color: theme.customColors.pink[600] },
 });
 

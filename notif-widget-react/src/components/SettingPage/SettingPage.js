@@ -22,7 +22,7 @@ import { getShortAddress } from 'SRC/utils/utils';
 
 function SubscribeSuccessPage() {
 	const theme = useTheme();
-	const [drawerOpen, setDrawerOpen] = useState(true);
+	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const handleOpenUnsubscribeDrawer = (e) => {
 		e.preventDefault();
@@ -44,7 +44,8 @@ function SubscribeSuccessPage() {
 						{getShortAddress('0x81495eBd37c266ccb6516E037d7f76ABf016624e')}
 					</StyledAddress>
 					<Box sx={{ ml: 'auto' }}>
-						<StatusLabel>訂閱中</StatusLabel>
+						{/* <StatusLabel>Subscribed</StatusLabel> */}
+						<StatusLabel type='secondary'>Resubscribe</StatusLabel>
 					</Box>
 				</StyledAddressNotificationContainer>
 			</StyledNotifyWays>

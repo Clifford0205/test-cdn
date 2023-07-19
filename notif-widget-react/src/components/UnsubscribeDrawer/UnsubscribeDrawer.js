@@ -4,6 +4,7 @@ import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-mater
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { isEmpty } from 'lodash-es';
 import PropTypes from 'prop-types';
 
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
@@ -14,12 +15,19 @@ import {
 	StyledUnSubscribeAreaGuideText,
 	StyledUnSubscribeCheckArea,
 	StyledSingleNotifyWay,
+	StyledConfirmMsgTitle,
+	StyledConfirmMsg,
+	StyledCloseButton,
+	StyledSuccessUnsubscribeIcon,
+	StyledSuccessUnsubscribeTitle,
+	StyledSuccessUnsubscribeText,
 } from './UnSubscribeDrawer.styles';
 
 function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 	const theme = useTheme();
 	const [contentVisible, setContentVisible] = useState(onDrawerOpen);
 	const [selected, setSelected] = useState([]);
+	const [step, setStep] = useState(1);
 
 	const notificationWays = [
 		{
@@ -39,6 +47,10 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 		},
 	];
 
+	const handleBack = () => {
+		setStep(1);
+	};
+
 	const isSelected = (value) => selected.indexOf(value) !== -1;
 
 	const handleClick = (event) => {
@@ -51,12 +63,25 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 		}
 	};
 
+	const handleCloseDrawer = () => {
+		setStep(1);
+		onHandleCloseUnsubscribeDrawer();
+	};
+
+	const handleToConfirm = () => {
+		setStep(2);
+	};
+
+	const handleConfirmCancel = () => {
+		setStep(3);
+	};
+
 	// 為了讓動畫效果更順暢
 	useEffect(() => {
 		if (onDrawerOpen) {
 			const timer = setTimeout(() => {
 				setContentVisible(true);
-			}, 150); // 150ms 是容器展開的時間，可以根據實際情況調整
+			}, 0); // 150ms 是容器展開的時間，可以根據實際情況調整
 
 			return () => clearTimeout(timer);
 		}
@@ -67,51 +92,95 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 	return (
 		<StyledDrawer anchor='bottom' variant='permanent' open={onDrawerOpen}>
 			<Box hidden={!contentVisible}>
-				<StyledUnsubscribeAreaContainer>
-					<Box px='8px'>
-						<StyledUnSubscribeAreaGuideText>選擇需取消訂閱的渠道：</StyledUnSubscribeAreaGuideText>
-						<StyledUnSubscribeCheckArea>
-							<Grid container spacing={0.5}>
-								{notificationWays.map((notificationWay, index) => {
-									const isItemSelected = isSelected(notificationWay.value);
-									return (
-										<Grid xs={6} item key={notificationWay.name}>
-											<CustomCheckbox
-												label={
-													<StyledSingleNotifyWay>
-														{notificationWay.icon}
-														{notificationWay.name}
-													</StyledSingleNotifyWay>
-												}
-												checked={isItemSelected}
-												onChange={handleClick}
-												name={notificationWay.name}
-												value={notificationWay.value}
-											/>
-										</Grid>
-									);
-								})}
+				<Box hidden={step !== 1}>
+					<StyledUnsubscribeAreaContainer>
+						<Box px='8px'>
+							<StyledUnSubscribeAreaGuideText>
+								選擇需取消訂閱的渠道：
+							</StyledUnSubscribeAreaGuideText>
+							<StyledUnSubscribeCheckArea>
+								<Grid container spacing={0.5}>
+									{notificationWays.map((notificationWay, index) => {
+										const isItemSelected = isSelected(notificationWay.value);
+										return (
+											<Grid xs={6} item key={notificationWay.name}>
+												<CustomCheckbox
+													label={
+														<StyledSingleNotifyWay>
+															{notificationWay.icon}
+															{notificationWay.name}
+														</StyledSingleNotifyWay>
+													}
+													checked={isItemSelected}
+													onChange={handleClick}
+													name={notificationWay.name}
+													value={notificationWay.value}
+												/>
+											</Grid>
+										);
+									})}
+								</Grid>
+							</StyledUnSubscribeCheckArea>
+						</Box>
+						<Grid container spacing={0.5}>
+							<Grid xs={6} item>
+								<Button
+									fullWidth
+									color={COLOR.SETTING}
+									variant={VARIANT.TEXT}
+									onClick={handleCloseDrawer}
+								>
+									Cancel
+								</Button>
 							</Grid>
-						</StyledUnSubscribeCheckArea>
-					</Box>
-					<Grid container spacing={0.5}>
-						<Grid xs={6} item>
-							<Button
-								fullWidth
-								color={COLOR.SETTING}
-								variant={VARIANT.TEXT}
-								onClick={onHandleCloseUnsubscribeDrawer}
-							>
-								Cancel
-							</Button>
+							<Grid xs={6} item>
+								<Button
+									fullWidth
+									color={COLOR.SECONDARY}
+									disabled={isEmpty(selected)}
+									onClick={handleToConfirm}
+								>
+									Next
+								</Button>
+							</Grid>
 						</Grid>
-						<Grid xs={6} item>
-							<Button fullWidth color={COLOR.SECONDARY}>
-								Next
-							</Button>
+					</StyledUnsubscribeAreaContainer>
+				</Box>
+				<Box hidden={step !== 2}>
+					<StyledUnsubscribeAreaContainer>
+						<StyledConfirmMsgTitle>Are you sure?</StyledConfirmMsgTitle>
+						<StyledConfirmMsg>
+							Unsubscribing may miss important information, we strongly recommend keeping at least
+							one favorite channel！
+						</StyledConfirmMsg>
+						<Grid container spacing={0.5}>
+							<Grid xs={6} item>
+								<Button fullWidth color={COLOR.SETTING} variant={VARIANT.TEXT} onClick={handleBack}>
+									Back
+								</Button>
+							</Grid>
+							<Grid xs={6} item>
+								<Button fullWidth color={COLOR.SECONDARY} onClick={handleConfirmCancel}>
+									Unsubscribe
+								</Button>
+							</Grid>
 						</Grid>
-					</Grid>
-				</StyledUnsubscribeAreaContainer>
+					</StyledUnsubscribeAreaContainer>
+				</Box>
+				<Box hidden={step !== 3}>
+					<StyledCloseButton>
+						<IconButton onClick={handleCloseDrawer} color={theme.customColors.grey[700]}>
+							<i className='font-icon-ic_x_circle font-size-20' />
+						</IconButton>
+					</StyledCloseButton>
+					<StyledSuccessUnsubscribeIcon>
+						<i className='font-icon-ic_checked font-size-24' />
+					</StyledSuccessUnsubscribeIcon>
+					<StyledSuccessUnsubscribeTitle>Successfully unsubscribed</StyledSuccessUnsubscribeTitle>
+					<StyledSuccessUnsubscribeText>
+						You can turn these notifiactions back in the setting page
+					</StyledSuccessUnsubscribeText>
+				</Box>
 			</Box>
 		</StyledDrawer>
 	);

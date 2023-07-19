@@ -31,7 +31,7 @@ function PopoverHeader({ onClose }) {
 				<StyledCenterText>Get Notified</StyledCenterText>
 
 				<StyledEndSlot>
-					<IconButton onClick={onClose}>
+					<IconButton onClick={onClose} color={theme.customColors.grey[700]}>
 						<i className='font-icon-ic_x_circle font-size-20' />
 					</IconButton>
 				</StyledEndSlot>
