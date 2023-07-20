@@ -13,12 +13,15 @@ const colorMap = (theme) => ({
 
 export const StyledStatusLabel = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
-})(({ theme, size = 'small', type = 'primary' }) => ({
+})(({ theme, size = 'small', type = 'primary', onClick = null }) => ({
 	...colorMap(theme)[type],
 	...(size === 'small' && {
 		fontSize: '12px',
 		padding: '1.5px 4px',
 		height: '17px',
 		borderRadius: '15px',
+	}),
+	...(onClick && {
+		cursor: 'pointer',
 	}),
 }));

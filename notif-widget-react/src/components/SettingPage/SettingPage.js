@@ -4,6 +4,7 @@ import { VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import StatusLabel from '../StatusLabel/StatusLabel';
 import UnsubscribeDrawer from '../UnsubscribeDrawer/UnsubscribeDrawer';
@@ -22,6 +23,8 @@ import { getShortAddress } from 'SRC/utils/utils';
 
 function SubscribeSuccessPage() {
 	const theme = useTheme();
+	const navigate = useNavigate();
+
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const handleOpenUnsubscribeDrawer = (e) => {
@@ -31,6 +34,10 @@ function SubscribeSuccessPage() {
 
 	const handleCloseUnsubscribeDrawer = () => {
 		setDrawerOpen(false);
+	};
+
+	const handleSubscribe = () => {
+		navigate('/subscribeSuccess');
 	};
 
 	return (
@@ -45,7 +52,9 @@ function SubscribeSuccessPage() {
 					</StyledAddress>
 					<Box sx={{ ml: 'auto' }}>
 						{/* <StatusLabel>Subscribed</StatusLabel> */}
-						<StatusLabel type='secondary'>Resubscribe</StatusLabel>
+						<StatusLabel type='secondary' onClick={handleSubscribe}>
+							Resubscribe
+						</StatusLabel>
 					</Box>
 				</StyledAddressNotificationContainer>
 			</StyledNotifyWays>

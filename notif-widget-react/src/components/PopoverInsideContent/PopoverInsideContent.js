@@ -6,9 +6,11 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Toolbar, AppBar, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import NotificationDetailPage from '../NotificationDetailPage/NotificationDetailPage';
 import NotificationPage from '../NotificationPage/NotificationPage';
+import NotificationPageContainer from '../NotificationPage/NotificationPageContainer';
 import SettingPage from '../SettingPage/SettingPage';
 import SubscribeSuccessPage from '../SubscribeSuccessPage/SubscribeSuccessPage';
 
@@ -26,7 +28,18 @@ function PopoverInsideContent() {
 
 	const renderSettingPage = () => <SettingPage />;
 
-	return <StyledInsideContentContainer>{renderNotificationPage()}</StyledInsideContentContainer>;
+	// return <StyledInsideContentContainer>{renderNotificationPage()}</StyledInsideContentContainer>;
+
+	return (
+		<StyledInsideContentContainer>
+			<Routes>
+				<Route index element={<NotificationPage />} />
+				<Route path='detail/:notificationId' element={<NotificationDetailPage />} />
+				<Route path='setting' element={<SettingPage />} />
+				<Route path='subscribeSuccess' element={<SubscribeSuccessPage />} />
+			</Routes>
+		</StyledInsideContentContainer>
+	);
 }
 
 PopoverInsideContent.propTypes = {};

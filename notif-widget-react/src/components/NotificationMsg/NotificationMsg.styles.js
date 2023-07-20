@@ -2,10 +2,11 @@ import styled from '@emotion/styled/macro';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { Toolbar, AppBar } from '@mui/material';
 import Box from '@mui/material/Box';
+import { Link } from 'react-router-dom';
 
 import isStyledPropsValid from 'SRC/utils/isStyledPropsValid';
 
-export const StyledNotificationMsgContainer = styled(Box, {
+export const StyledNotificationMsgContainer = styled(Link, {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	display: 'flex',

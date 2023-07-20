@@ -11,9 +11,10 @@ import '@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
 
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
-
 import './index.css';
 import './index.scss';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+
 import App from './App';
 import CustomThemeProvider from './CustomThemeProvider';
 
@@ -98,9 +99,11 @@ function AppFrameComponent(props) {
 					});
 					return (
 						<CacheProvider value={cache}>
-							<CustomThemeProvider>
-								<App parentWindow={parentWindow} />
-							</CustomThemeProvider>
+							<MemoryRouter>
+								<CustomThemeProvider>
+									<App parentWindow={parentWindow} />
+								</CustomThemeProvider>
+							</MemoryRouter>
 						</CacheProvider>
 					);
 				}}

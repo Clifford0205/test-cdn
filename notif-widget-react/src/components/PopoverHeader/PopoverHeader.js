@@ -3,7 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Toolbar, AppBar, useTheme } from '@mui/material';
+import { includes } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import {
 	StyledHeaderContainer,
@@ -16,19 +18,59 @@ import {
 
 function PopoverHeader({ onClose }) {
 	const theme = useTheme();
-	return (
-		<StyledHeaderContainer>
-			<StyledHeader>
-				<StyledStartSlot>
+	const navigate = useNavigate();
+	const location = useLocation();
+	console.log('location: ', location);
+
+	const handleToSetting = () => {
+		navigate('setting');
+	};
+
+	const renderStartButton = () => {
+		switch (location.pathname) {
+			case '/':
+				return (
 					<StyledStartSlotButton
 						startIcon={<i className='font-icon-ic_settingLine font-size-16' />}
 						size={SIZE.XS}
 						variant={VARIANT.SHADOW}
+						component={Link}
+						to='setting'
 					>
 						Setting
 					</StyledStartSlotButton>
-				</StyledStartSlot>
-				<StyledCenterText>Get Notified</StyledCenterText>
+				);
+			case '/setting':
+			case location.pathname.includes('/detail/') && location.pathname:
+				return (
+					<IconButton color={theme.customColors.grey[700]} onClick={() => navigate(-1)}>
+						<i className='font-icon-ic_arrowLineLeft' />
+					</IconButton>
+				);
+			default:
+				return null;
+		}
+	};
+
+	const renderHeader = () => {
+		switch (location.pathname) {
+			case '/':
+				return 'Alert History';
+			case '/setting':
+			case '/subscribeSuccess':
+				return 'Setting';
+			case location.pathname.includes('/detail/') && location.pathname:
+				return '項目方名稱';
+			default:
+				return 'Alert History';
+		}
+	};
+
+	return (
+		<StyledHeaderContainer>
+			<StyledHeader>
+				<StyledStartSlot>{renderStartButton()}</StyledStartSlot>
+				<StyledCenterText>{renderHeader()}</StyledCenterText>
 
 				<StyledEndSlot>
 					<IconButton onClick={onClose} color={theme.customColors.grey[700]}>

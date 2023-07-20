@@ -4,6 +4,7 @@ import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-mater
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import {
 	StyledDrawer,
@@ -17,7 +18,14 @@ import {
 
 function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 	const theme = useTheme();
+	const navigate = useNavigate();
+
 	const [contentVisible, setContentVisible] = useState(onDrawerOpen);
+
+	const handleSubscribe = () => {
+		navigate('/subscribeSuccess');
+		onHandleCloseSubscribeDrawer();
+	};
 
 	// 為了讓動畫效果更順暢
 	useEffect(() => {
@@ -39,7 +47,12 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 					<StyledSubscribeAreaGuideText>
 						開啟小鈴鐺，直接在此接收管理重要訊息。
 					</StyledSubscribeAreaGuideText>
-					<StyledReSubscribeButton fullWidth color={COLOR.SECONDARY} variant={VARIANT.OUTLINED}>
+					<StyledReSubscribeButton
+						fullWidth
+						color={COLOR.SECONDARY}
+						variant={VARIANT.OUTLINED}
+						onClick={handleSubscribe}
+					>
 						<i className='font-icon-ic_bell font-size-18' /> Resubscribe
 					</StyledReSubscribeButton>
 				</StyledSubscribeAreaContainer>

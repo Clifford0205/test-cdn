@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { ThemeProvider } from "@material-ui/core/styles";
 import ColorModeContext from '@metacrm/metacrm-material-ui/dist/contexts/ColorMode.context';
 import useColorMode from '@metacrm/metacrm-material-ui/dist/hooks/useColorMode.hooks';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider, GlobalStyles } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
@@ -22,10 +22,17 @@ function CustomThemeProvider(props) {
 
 	const newTheme = createTheme(newThemeSetting);
 
+	const globalStyle = {
+		a: {
+			textDecoration: 'none',
+		},
+	};
+
 	return (
 		<ColorModeContext.Provider value={colorModeHooksValue}>
 			<ThemeProvider theme={newTheme}>
 				<CssBaseline />
+				<GlobalStyles styles={globalStyle} />
 				{props.children}
 			</ThemeProvider>
 		</ColorModeContext.Provider>

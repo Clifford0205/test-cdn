@@ -35,16 +35,16 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 			value: 'Bell Widget',
 			icon: <i className='font-icon-ic_widjet font-size-16' />,
 		},
-		{
-			name: 'Email',
-			value: 'Email',
-			icon: <i className='font-icon-ic_email font-size-16' />,
-		},
-		{
-			name: 'Discord',
-			value: 'Discord',
-			icon: <i className='font-icon-ic_discord font-size-16' />,
-		},
+		// {
+		// 	name: 'Email',
+		// 	value: 'Email',
+		// 	icon: <i className='font-icon-ic_email font-size-16' />,
+		// },
+		// {
+		// 	name: 'Discord',
+		// 	value: 'Discord',
+		// 	icon: <i className='font-icon-ic_discord font-size-16' />,
+		// },
 	];
 
 	const handleBack = () => {

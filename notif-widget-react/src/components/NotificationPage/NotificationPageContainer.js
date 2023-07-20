@@ -7,9 +7,12 @@ import { Toolbar, AppBar, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { isEmpty } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
+import NotificationDetailPage from '../NotificationDetailPage/NotificationDetailPage';
 import NotificationMsg from '../NotificationMsg/NotificationMsg';
 
+import NotificationPage from './NotificationPage';
 import {
 	StyledAnnounceContainer,
 	StyledAnnounce,
@@ -20,15 +23,9 @@ import {
 	StyledNoNotification,
 } from './NotificationPage.styles';
 
-const numbers = [
-	{ notificationId: '1' },
-	{ notificationId: '2' },
-	{ notificationId: '3' },
-	{ notificationId: '4' },
-	{ notificationId: '5' },
-];
+const numbers = [1, 2, 3, 4, 5];
 
-function NotificationPage() {
+function NotificationPageContainer() {
 	const [address, setAddress] = useState(true);
 
 	const renderNoConnect = () => (
@@ -60,8 +57,9 @@ function NotificationPage() {
 				</StyledAnnounce>
 			</StyledAnnounceContainer>
 			{numbers.map((item, index) => (
-				<NotificationMsg notificationInfo={item} key={index} />
+				<NotificationMsg key={index} />
 			))}
+			)
 		</>
 	);
 
@@ -72,11 +70,18 @@ function NotificationPage() {
 		return renderNotifications();
 	};
 
-	return <>{address ? hasAnyNotification() : renderNoConnect()}</>;
+	return (
+		<>
+			<Routes>
+				<Route index element={<NotificationPage />} />
+				<Route path=':notificationId' element={<NotificationDetailPage />} />
+			</Routes>{' '}
+		</>
+	);
 }
 
-NotificationPage.propTypes = {};
+NotificationPageContainer.propTypes = {};
 
-NotificationPage.defaultProps = {};
+NotificationPageContainer.defaultProps = {};
 
-export default NotificationPage;
+export default NotificationPageContainer;

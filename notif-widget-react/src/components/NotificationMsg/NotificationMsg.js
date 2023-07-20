@@ -19,9 +19,9 @@ import {
 	StyledArrow,
 } from './NotificationMsg.styles';
 
-function NotificationMsg() {
+function NotificationMsg({ notificationInfo }) {
 	return (
-		<StyledNotificationMsgContainer>
+		<StyledNotificationMsgContainer to={`/detail/${notificationInfo.notificationId}`}>
 			<StyledRedDotContainer>
 				<StyledRedDot />
 			</StyledRedDotContainer>
@@ -44,8 +44,16 @@ function NotificationMsg() {
 	);
 }
 
-NotificationMsg.propTypes = {};
+NotificationMsg.propTypes = {
+	notificationInfo: PropTypes.shape({
+		notificationId: PropTypes.string,
+	}),
+};
 
-NotificationMsg.defaultProps = {};
+NotificationMsg.defaultProps = {
+	notificationInfo: {
+		notificationId: null,
+	},
+};
 
 export default NotificationMsg;
