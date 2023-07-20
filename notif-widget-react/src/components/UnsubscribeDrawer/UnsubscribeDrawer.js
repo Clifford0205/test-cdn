@@ -81,7 +81,7 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 		if (onDrawerOpen) {
 			const timer = setTimeout(() => {
 				setContentVisible(true);
-			}, 0); // 150ms 是容器展開的時間，可以根據實際情況調整
+			}, 370); // 370ms 是容器展開的時間，可以根據實際情況調整
 
 			return () => clearTimeout(timer);
 		}

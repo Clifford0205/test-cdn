@@ -16,14 +16,18 @@ export const StyledDrawer = styled(Drawer, {
 		padding: '20px 16px 10px',
 		boxShadow: `0px -2px 8px 0px #00000026`,
 		borderRadius: `10px 10px 5px 5px`,
-		transition: theme.transitions.create('max-height', {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
 		maxHeight: '570px',
+		minHeight: '120px',
+
+		transition: theme.transitions.create('min-height', {
+			easing: theme.transitions.easing.easeInOut,
+			duration: theme.transitions.duration.complex,
+		}),
+
 		...(!open && {
 			padding: 0,
 			maxHeight: 0,
+			minHeight: 0,
 			overflow: 'hidden',
 			border: 0,
 		}),
