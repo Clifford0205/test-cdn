@@ -4,6 +4,7 @@ import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
 import PopoverFooter from '../PopoverFooter/PopoverFooter';
@@ -13,8 +14,15 @@ import SubscribeDrawer from '../SubscribeDrawer/SubscribeDrawer';
 
 import { StyledPopoverContentContainer } from './PopoverContentContainer.styles';
 
+import { setSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.reducer';
+import { selectSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.selector';
+
+console.log('重新載入');
 function PopoverContentContainer({ onClose }) {
-	const [drawerOpen, setDrawerOpen] = useState(true);
+	// const [drawerOpen, setDrawerOpen] = useState(true);
+	const subscribeDrawerOpen = useSelector(selectSubscribeDrawerOpen);
+	const dispatch = useDispatch();
+
 	const location = useLocation();
 	const theme = useTheme();
 
@@ -28,7 +36,8 @@ function PopoverContentContainer({ onClose }) {
 	};
 
 	const handleCloseSubscribeDrawer = () => {
-		setDrawerOpen(false);
+		// setDrawerOpen(false);
+		dispatch(setSubscribeDrawerOpen(false));
 	};
 
 	return (
@@ -37,7 +46,7 @@ function PopoverContentContainer({ onClose }) {
 			<PopoverInsideContent />
 			{renderFooter()}
 			<SubscribeDrawer
-				onDrawerOpen={drawerOpen}
+				onDrawerOpen={subscribeDrawerOpen}
 				onHandleCloseSubscribeDrawer={handleCloseSubscribeDrawer}
 			/>
 		</StyledPopoverContentContainer>

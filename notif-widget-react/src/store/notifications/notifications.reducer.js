@@ -6,6 +6,7 @@ export const INITIAL_STATE = {
 	notificationsList: [],
 	listIsLoading: false,
 	error: null,
+	subscribeDrawerOpen: true,
 };
 
 export const getNotificationsList = createAsyncThunk(
@@ -24,6 +25,11 @@ export const getNotificationsList = createAsyncThunk(
 export const notificationsSlice = createSlice({
 	name: 'notifications',
 	initialState: INITIAL_STATE,
+	reducers: {
+		setSubscribeDrawerOpen(state, action) {
+			state.subscribeDrawerOpen = action.payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder.addCase(getNotificationsList.pending, (state) => {
 			state.listIsLoading = true;
@@ -38,5 +44,7 @@ export const notificationsSlice = createSlice({
 		});
 	},
 });
+
+export const { setSubscribeDrawerOpen } = notificationsSlice.actions;
 
 export const notificationsReducer = notificationsSlice.reducer;
