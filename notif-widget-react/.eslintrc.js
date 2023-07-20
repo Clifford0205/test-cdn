@@ -49,6 +49,7 @@ module.exports = {
 		'import/no-cycle': 'off',
 		'react/no-array-index-key': 'off',
 		'import/no-extraneous-dependencies': 'off',
+		'no-param-reassign': 'off',
 	},
 	settings: {
 		'import/resolver': {

@@ -8,13 +8,12 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import NotificationDetailPage from '../NotificationDetailPage/NotificationDetailPage';
-import NotificationPage from '../NotificationPage/NotificationPage';
-import NotificationPageContainer from '../NotificationPage/NotificationPageContainer';
-import SettingPage from '../SettingPage/SettingPage';
-import SubscribeSuccessPage from '../SubscribeSuccessPage/SubscribeSuccessPage';
-
 import { StyledInsideContentContainer } from './PopoverInsideContent.styles';
+
+import NotificationDetailPage from 'SRC/pages/NotificationDetailPage/NotificationDetailPage';
+import NotificationPage from 'SRC/pages/NotificationPage/NotificationPage';
+import SettingPage from 'SRC/pages/SettingPage/SettingPage';
+import SubscribeSuccessPage from 'SRC/pages/SubscribeSuccessPage/SubscribeSuccessPage';
 
 function PopoverInsideContent() {
 	const theme = useTheme();

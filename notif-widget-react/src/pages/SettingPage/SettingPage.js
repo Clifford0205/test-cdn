@@ -6,9 +6,6 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import StatusLabel from '../StatusLabel/StatusLabel';
-import UnsubscribeDrawer from '../UnsubscribeDrawer/UnsubscribeDrawer';
-
 import {
 	StyledSettingPageContainer,
 	StyledNotifyWays,
@@ -19,6 +16,8 @@ import {
 	StyledClickHere,
 } from './SettingPage.styles';
 
+import StatusLabel from 'SRC/components/StatusLabel/StatusLabel';
+import UnsubscribeDrawer from 'SRC/components/UnsubscribeDrawer/UnsubscribeDrawer';
 import { getShortAddress } from 'SRC/utils/utils';
 
 function SubscribeSuccessPage() {

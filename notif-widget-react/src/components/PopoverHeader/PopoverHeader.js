@@ -20,7 +20,6 @@ function PopoverHeader({ onClose }) {
 	const theme = useTheme();
 	const navigate = useNavigate();
 	const location = useLocation();
-	console.log('location: ', location);
 
 	const handleToSetting = () => {
 		navigate('setting');

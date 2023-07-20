@@ -7,6 +7,7 @@ import { Popover, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { get } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledPopover, StyledIconButton, StyledRedDot } from './App.styles';
 import icon from './ic_widjet.svg';
@@ -15,10 +16,12 @@ import PopoverContentContainer from 'SRC/components/PopoverContentContainer/Popo
 import { FRAME_OPENED, FRAME_CLOSED, FRAME_HEIGHT_VIEWPORT } from 'SRC/constants/iframeSizes';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
 import { setFrameSize } from 'SRC/index';
+import { setCurrentUser } from 'SRC/store/user/user.reducer';
 
 function App({ parentWindow }) {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [address, setAddress] = useState(null);
+	const dispatch = useDispatch();
 	const widgetElement = document.getElementById('meta-crm-widget');
 	const size = useWindowSize();
 	const open = Boolean(anchorEl);
@@ -62,6 +65,7 @@ function App({ parentWindow }) {
 		setAnchorEl(null);
 	};
 
+	// 動態計算 iFrame高度
 	useEffect(() => {
 		if (anchorEl) {
 			if (size.height > FRAME_HEIGHT_VIEWPORT[1]) {

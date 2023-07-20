@@ -11,6 +11,7 @@ import '@metacrm/metacrm-svg/dist/public/fonts/font-icon.css';
 
 import ReactDOM from 'react-dom';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
+import { Provider } from 'react-redux';
 import './index.css';
 import './index.scss';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
@@ -19,6 +20,7 @@ import App from './App';
 import CustomThemeProvider from './CustomThemeProvider';
 
 import { FRAME_CLOSED } from 'SRC/constants/iframeSizes';
+import { store } from 'SRC/store/store';
 
 export const setFrameSize = (targetFrame, sizeSet) => {
 	if (!targetFrame) {
@@ -99,11 +101,13 @@ function AppFrameComponent(props) {
 					});
 					return (
 						<CacheProvider value={cache}>
-							<MemoryRouter>
-								<CustomThemeProvider>
-									<App parentWindow={parentWindow} />
-								</CustomThemeProvider>
-							</MemoryRouter>
+							<Provider store={store}>
+								<MemoryRouter>
+									<CustomThemeProvider>
+										<App parentWindow={parentWindow} />
+									</CustomThemeProvider>
+								</MemoryRouter>
+							</Provider>
 						</CacheProvider>
 					);
 				}}

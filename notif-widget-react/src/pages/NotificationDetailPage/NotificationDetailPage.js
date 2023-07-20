@@ -8,8 +8,6 @@ import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
-import NotificationMsg from '../NotificationMsg/NotificationMsg';
-
 import {
 	StyledTimeArea,
 	StyledNotificationDetailType,
@@ -18,9 +16,10 @@ import {
 	StyledNotificationDetailInfoContainer,
 } from './NotificationDetailPage.styles';
 
+import NotificationMsg from 'SRC/components/NotificationMsg/NotificationMsg';
+
 function NotificationDetailPage() {
 	const { notificationId } = useParams();
-	console.log('notificationId: ', notificationId);
 	return (
 		<Box>
 			<StyledTimeArea>18:58</StyledTimeArea>
