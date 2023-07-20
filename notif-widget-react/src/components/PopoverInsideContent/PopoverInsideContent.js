@@ -12,31 +12,11 @@ import NotificationPage from '../NotificationPage/NotificationPage';
 import SettingPage from '../SettingPage/SettingPage';
 import SubscribeSuccessPage from '../SubscribeSuccessPage/SubscribeSuccessPage';
 
-import {
-	StyledInsideContentContainer,
-	StyledNoConnect,
-	StyledNoNotification,
-} from './PopoverInsideContent.styles';
+import { StyledInsideContentContainer } from './PopoverInsideContent.styles';
 
 function PopoverInsideContent() {
 	const theme = useTheme();
 	const [notifications, setNotifications] = useState([]);
-
-	const renderNoConnect = () => (
-		<StyledNoConnect>
-			<IconIcOops sx={{ mb: '20px' }} width={60} height={60} />
-			<div>Please connect your wallet through the website</div>
-		</StyledNoConnect>
-	);
-
-	const renderWithoutNotification = () => (
-		<StyledNoNotification>
-			<Box sx={{ mb: '20px', fontSize: '60px' }}>
-				<i className='font-icon-ic_widjet font-size-32' />
-			</Box>
-			<div>You haven’t received any notifacations yet</div>
-		</StyledNoNotification>
-	);
 
 	const renderNotificationPage = () => <NotificationPage />;
 

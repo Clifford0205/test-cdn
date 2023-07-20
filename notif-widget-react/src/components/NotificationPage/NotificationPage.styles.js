@@ -51,3 +51,30 @@ export const StyledAnnounceContent = styled('div', {
 	'-webkit-box-orient': 'vertical',
 	'-webkit-line-clamp': '2',
 }));
+
+const noContentMixin = (theme) => ({
+	width: '100%',
+	height: '100%',
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	justifyContent: 'center',
+	fontSize: '12px',
+});
+
+export const StyledNoConnect = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	...noContentMixin(theme),
+}));
+
+export const StyledNoNotification = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	...noContentMixin(theme),
+
+	'& i': {
+		fontSize: '46px',
+		color: theme.customColors.grey[700],
+	},
+}));

@@ -5,6 +5,7 @@ import IconIcOops from '@metacrm/metacrm-svg/dist/SvgIcon/svg-icons/IconIcOops';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Toolbar, AppBar, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
+import { isEmpty } from 'lodash-es';
 import PropTypes from 'prop-types';
 
 import NotificationMsg from '../NotificationMsg/NotificationMsg';
@@ -15,12 +16,32 @@ import {
 	StyledAnnounceTitle,
 	StyledAnnounceContent,
 	StyledRedDot,
+	StyledNoConnect,
+	StyledNoNotification,
 } from './NotificationPage.styles';
 
 const numbers = [1, 2, 3, 4, 5];
 
 function NotificationPage() {
-	return (
+	const [address, setAddress] = useState(true);
+
+	const renderNoConnect = () => (
+		<StyledNoConnect>
+			<IconIcOops sx={{ mb: '20px' }} width={60} height={60} />
+			<div>Please connect your wallet through the website</div>
+		</StyledNoConnect>
+	);
+
+	const renderWithoutNotification = () => (
+		<StyledNoNotification>
+			<Box sx={{ mb: '20px', fontSize: '60px' }}>
+				<i className='font-icon-ic_widjet font-size-32' />
+			</Box>
+			<div>You haven’t received any notifacations yet</div>
+		</StyledNoNotification>
+	);
+
+	const renderNotifications = () => (
 		<>
 			<StyledAnnounceContainer>
 				<StyledAnnounce>
@@ -35,8 +56,18 @@ function NotificationPage() {
 			{numbers.map((item, index) => (
 				<NotificationMsg key={index} />
 			))}
+			)
 		</>
 	);
+
+	const hasAnyNotification = () => {
+		if (isEmpty(numbers)) {
+			return renderWithoutNotification();
+		}
+		return renderNotifications();
+	};
+
+	return <>{address ? hasAnyNotification() : renderNoConnect()}</>;
 }
 
 NotificationPage.propTypes = {};
