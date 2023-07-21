@@ -17,7 +17,6 @@ import { StyledPopoverContentContainer } from './PopoverContentContainer.styles'
 import { setSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.reducer';
 import { selectSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.selector';
 
-console.log('重新載入');
 function PopoverContentContainer({ onClose }) {
 	// const [drawerOpen, setDrawerOpen] = useState(true);
 	const subscribeDrawerOpen = useSelector(selectSubscribeDrawerOpen);

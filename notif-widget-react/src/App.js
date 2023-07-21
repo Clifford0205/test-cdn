@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StyledPopover, StyledIconButton, StyledRedDot } from './App.styles';
 import icon from './ic_widjet.svg';
 
+import { fetchNotificationsList } from 'SRC/api/notifications';
 import PopoverContentContainer from 'SRC/components/PopoverContentContainer/PopoverContentContainer';
 import { FRAME_OPENED, FRAME_CLOSED, FRAME_HEIGHT_VIEWPORT } from 'SRC/constants/iframeSizes';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
 import { setFrameSize } from 'SRC/index';
-import { setCurrentUser } from 'SRC/store/user/user.reducer';
+import { setCurrentUserAddress } from 'SRC/store/user/user.reducer';
+import { selectUserAddress } from 'SRC/store/user/user.selector';
 
 function App({ parentWindow }) {
 	const [anchorEl, setAnchorEl] = useState(null);
@@ -27,26 +29,36 @@ function App({ parentWindow }) {
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popover' : undefined;
 	const theme = useTheme();
+	const userAddress = useSelector(selectUserAddress);
 
 	const onInit = async () => {
 		if (!get(parentWindow, 'ethereum')) {
 			return;
 		}
 		try {
-			await parentWindow.ethereum.enable();
-			const accounts = await parentWindow.ethereum.request({
-				method: 'eth_requestAccounts',
+			// await dispatch(setCurrentUserAddress('0x81495eBd37c266ccb6516E037d7f76ABf016624e'));
+			const notifications = await fetchNotificationsList({
+				address: '0x81495eBd37c266ccb6516E037d7f76ABf016624e',
 			});
-			setAddress(accounts[0]);
-			parentWindow.ethereum.on('accountsChanged', (newAccounts) => {
-				try {
-					// Time to reload your interface with accounts[0]!
-					setAddress(newAccounts[0]);
-				} catch (error) {
-					setAddress(null);
-					console.error('An error occurred in the accountsChanged event handler:', error);
-				}
-			});
+			console.log('notifications: ', notifications);
+			// console.log(userAddress);
+
+			// await parentWindow.ethereum.enable();
+			// const accounts = await parentWindow.ethereum.request({
+			// 	method: 'eth_requestAccounts',
+			// });
+			// setAddress(accounts[0]);
+			// console.log('accounts[0]: ', accounts[0]);
+
+			// parentWindow.ethereum.on('accountsChanged', (newAccounts) => {
+			// 	try {
+			// 		// Time to reload your interface with accounts[0]!
+			// 		setAddress(newAccounts[0]);
+			// 	} catch (error) {
+			// 		setAddress(null);
+			// 		console.error('An error occurred in the accountsChanged event handler:', error);
+			// 	}
+			// });
 		} catch (error) {
 			console.error('An error occurred:', error);
 			setAddress(null);
