@@ -17,7 +17,7 @@ import PopoverContentContainer from 'SRC/components/PopoverContentContainer/Popo
 import { FRAME_OPENED, FRAME_CLOSED, FRAME_HEIGHT_VIEWPORT } from 'SRC/constants/iframeSizes';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
 import { setFrameSize } from 'SRC/index';
-import { setCurrentUserAddress } from 'SRC/store/user/user.reducer';
+import { updateUserAddressAndAnnouncementsAndNotifications } from 'SRC/store/others/others.reducer';
 import { selectUserAddress } from 'SRC/store/user/user.selector';
 
 function App({ parentWindow }) {
@@ -36,12 +36,14 @@ function App({ parentWindow }) {
 			return;
 		}
 		try {
-			// await dispatch(setCurrentUserAddress('0x81495eBd37c266ccb6516E037d7f76ABf016624e'));
-			const notifications = await fetchNotificationsList({
-				address: '0x81495eBd37c266ccb6516E037d7f76ABf016624e',
-			});
-			console.log('notifications: ', notifications);
-			// console.log(userAddress);
+			await dispatch(
+				updateUserAddressAndAnnouncementsAndNotifications(
+					'0x81495eBd37c266ccb6516E037d7f76ABf016624e',
+				),
+			);
+			// dispatch(
+			// 	getAnnounceAndNotificationsList({ address: '0x81495eBd37c266ccb6516E037d7f76ABf016624e' }),
+			// );
 
 			// await parentWindow.ethereum.enable();
 			// const accounts = await parentWindow.ethereum.request({

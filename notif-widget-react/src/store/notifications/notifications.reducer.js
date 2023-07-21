@@ -4,19 +4,19 @@ import { fetchNotificationsList } from 'SRC/api/notifications';
 
 export const INITIAL_STATE = {
 	notificationsList: [],
+	announcementsList: [],
 	listIsLoading: false,
 	error: null,
 	subscribeDrawerOpen: true,
 };
 
-export const getNotificationsList = createAsyncThunk(
-	'notifications/getNotificationsList',
-	async ({ errCb }, { rejectWithValue }) => {
+export const getAnnounceAndNotificationsList = createAsyncThunk(
+	'notifications/getAnnounceAndNotificationsList',
+	async ({ address }, { rejectWithValue }) => {
 		try {
-			const notificationArray = await fetchNotificationsList();
-			return notificationArray;
+			const announceAndNotificationsList = await fetchNotificationsList({ address });
+			return announceAndNotificationsList;
 		} catch (error) {
-			errCb();
 			return rejectWithValue(error);
 		}
 	},
@@ -31,14 +31,15 @@ export const notificationsSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(getNotificationsList.pending, (state) => {
+		builder.addCase(getAnnounceAndNotificationsList.pending, (state) => {
 			state.listIsLoading = true;
 		});
-		builder.addCase(getNotificationsList.fulfilled, (state, action) => {
+		builder.addCase(getAnnounceAndNotificationsList.fulfilled, (state, action) => {
 			state.listIsLoading = false;
-			state.notificationsList = action.payload;
+			state.notificationsList = action.payload.notifications;
+			state.announcementsList = action.payload.announcements;
 		});
-		builder.addCase(getNotificationsList.rejected, (state, action) => {
+		builder.addCase(getAnnounceAndNotificationsList.rejected, (state, action) => {
 			state.listIsLoading = false;
 			state.error = action.payload;
 		});

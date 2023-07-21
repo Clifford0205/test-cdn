@@ -7,6 +7,7 @@ import { Toolbar, AppBar, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import { isEmpty } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
 	StyledAnnounceContainer,
@@ -19,6 +20,10 @@ import {
 } from './NotificationPage.styles';
 
 import NotificationMsg from 'SRC/components/NotificationMsg/NotificationMsg';
+import {
+	selectNotificationsList,
+	selectAnnouncementsList,
+} from 'SRC/store/notifications/notifications.selector';
 
 const numbers = [
 	{ notificationId: '1' },
@@ -30,6 +35,8 @@ const numbers = [
 
 function NotificationPage() {
 	const [address, setAddress] = useState(true);
+	const notificationsList = useSelector(selectNotificationsList);
+	const announcementsList = useSelector(selectAnnouncementsList);
 
 	const renderNoConnect = () => (
 		<StyledNoConnect>
