@@ -19,21 +19,23 @@ import {
 	StyledArrow,
 } from './NotificationMsg.styles';
 
+import { formatSendingTime } from 'SRC/utils/utils';
+
 function NotificationMsg({ notificationInfo }) {
 	return (
-		<StyledNotificationMsgContainer to={`/detail/${notificationInfo.notificationId}`}>
-			<StyledRedDotContainer>
-				<StyledRedDot />
-			</StyledRedDotContainer>
+		<StyledNotificationMsgContainer to={`/detail/${notificationInfo._id}`}>
+			{notificationInfo.read && (
+				<StyledRedDotContainer>
+					<StyledRedDot />
+				</StyledRedDotContainer>
+			)}
 			<StyledNotificationContent>
-				<StyledNotificationType>Announcement</StyledNotificationType>
+				<StyledNotificationType>{notificationInfo.title}</StyledNotificationType>
 				<StyledNotificationInfo>
-					<StyledNotificationInfoText>
-						NConfirmations Confirmations Confir metaCRM NConfirmations Confirmations Confir metaCRM
-					</StyledNotificationInfoText>
+					<StyledNotificationInfoText>{notificationInfo.description}</StyledNotificationInfoText>
 					<StyledNotificationTime>
 						<i className='font-icon-ic_clock font-size-12' />
-						19:12
+						{formatSendingTime(notificationInfo.scheduledSendingTime)}
 					</StyledNotificationTime>
 				</StyledNotificationInfo>
 			</StyledNotificationContent>
@@ -46,13 +48,21 @@ function NotificationMsg({ notificationInfo }) {
 
 NotificationMsg.propTypes = {
 	notificationInfo: PropTypes.shape({
-		notificationId: PropTypes.string,
+		read: PropTypes.bool,
+		_id: PropTypes.string,
+		title: PropTypes.string,
+		description: PropTypes.string,
+		scheduledSendingTime: PropTypes.string,
 	}),
 };
 
 NotificationMsg.defaultProps = {
 	notificationInfo: {
-		notificationId: null,
+		read: false,
+		_id: '',
+		title: '',
+		description: '',
+		scheduledSendingTime: '',
 	},
 };
 

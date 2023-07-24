@@ -11,15 +11,13 @@ export const StyledTimeArea = styled('div', {
 	fontSize: '12px',
 	display: 'flex',
 	alignItems: 'center',
-	justifyContent: 'center',
-	backgroundColor: theme.customColors.grey[200],
-	padding: '10px',
+	padding: '9px 12px',
 }));
 
 export const StyledNotificationDetailInfoContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
-	padding: '16px',
+	padding: '0 12px 16px',
 }));
 
 export const StyledNotificationDetailType = styled('div', {
@@ -37,9 +35,22 @@ export const StyledNotificationDetailContent = styled('div', {
 	marginBottom: '10px',
 }));
 
+export const StyledImageArea = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	margin: '5px 0',
+	'& img': {
+		width: '100%',
+	},
+}));
+
 export const StyledLink = styled('a', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	color: theme.customColors.purple[500],
 	fontSize: '12px',
+	display: 'block',
+	margin: '5px 0',
+	textDecoration: 'underline',
+	cursor: 'pointer',
 }));

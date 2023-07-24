@@ -50,6 +50,7 @@ module.exports = {
 		'react/no-array-index-key': 'off',
 		'import/no-extraneous-dependencies': 'off',
 		'no-param-reassign': 'off',
+		'no-underscore-dangle': 'off',
 	},
 	settings: {
 		'import/resolver': {

@@ -1,21 +1,24 @@
 import styled from '@emotion/styled/macro';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { Toolbar, AppBar } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import isStyledPropsValid from 'SRC/utils/isStyledPropsValid';
 
 export const StyledAnnounceContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
-	padding: '8px 16px',
+	padding: '8px 16px 0',
 }));
 
-export const StyledAnnounce = styled('div', {
+export const StyledAnnounce = styled(Link, {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
 	position: 'relative',
 	borderRadius: '8px',
 	padding: '16px',
+	marginBottom: '8px',
+	display: 'block',
 	background:
 		'linear-gradient(197.24deg, #3E4DD2 -0.55%, #5563D4 46.82%, #8088D9 80.24%, #5488C4 113.13%)',
 }));

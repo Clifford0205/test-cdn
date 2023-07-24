@@ -57,23 +57,22 @@ function NotificationPage() {
 	const renderNotifications = () => (
 		<>
 			<StyledAnnounceContainer>
-				<StyledAnnounce>
-					<StyledRedDot />
-					<StyledAnnounceTitle>Arbitrum x Radiant x Chainkink</StyledAnnounceTitle>
-					<StyledAnnounceContent>
-						Join Isaac,Radiant’s Director of Communications,next Tuesday,5.2.202 Join
-						Isaac,Radiant’s Director of Communications,next Tuesday,5.2.202
-					</StyledAnnounceContent>
-				</StyledAnnounce>
+				{announcementsList.map((announcement, index) => (
+					<StyledAnnounce to={`/detail/${announcement._id}`}>
+						{!announcement.read && <StyledRedDot />}
+						<StyledAnnounceTitle>{announcement.title}</StyledAnnounceTitle>
+						<StyledAnnounceContent>{announcement.description}</StyledAnnounceContent>
+					</StyledAnnounce>
+				))}
 			</StyledAnnounceContainer>
-			{numbers.map((item, index) => (
-				<NotificationMsg notificationInfo={item} key={index} />
+			{notificationsList.map((notification, index) => (
+				<NotificationMsg notificationInfo={notification} key={index} />
 			))}
 		</>
 	);
 
 	const hasAnyNotification = () => {
-		if (isEmpty(numbers)) {
+		if (isEmpty(notificationsList) && isEmpty(announcementsList)) {
 			return renderWithoutNotification();
 		}
 		return renderNotifications();

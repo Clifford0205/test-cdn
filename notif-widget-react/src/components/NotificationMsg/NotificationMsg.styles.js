@@ -22,7 +22,7 @@ export const StyledNotificationMsgContainer = styled(Link, {
 export const StyledRedDotContainer = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
 })(({ theme }) => ({
-	flex: 1,
+	// flex: 1,
 }));
 
 export const StyledRedDot = styled('div', {

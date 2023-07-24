@@ -10,6 +10,6 @@ export const updateUserAddressAndAnnouncementsAndNotifications = createAsyncThun
 		dispatch(userSlice.actions.setCurrentUserAddress(address));
 
 		// then dispatch getAnnounceAndNotificationsList
-		await dispatch(getAnnounceAndNotificationsList(address));
+		await dispatch(getAnnounceAndNotificationsList({ address }));
 	},
 );
