@@ -1,11 +1,12 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { includes } from 'lodash-es';
+import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
+import { includes, find } from 'lodash-es';
 
 import {
 	fetchNotificationsList,
 	fetchNotificationsSetting,
 	postUnsubscribeChannels,
 	postSubscribeChannel,
+	postNotificationsRead,
 } from 'SRC/api/notifications';
 
 export const INITIAL_STATE = {
@@ -24,6 +25,21 @@ export const getAnnounceAndNotificationsList = createAsyncThunk(
 		try {
 			const announceAndNotificationsList = await fetchNotificationsList({ address });
 			return announceAndNotificationsList;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+export const updateAnnounceAndNotificationsListRead = createAsyncThunk(
+	'notifications/updateAnnounceAndNotificationsListRead',
+	async ({ address, notificationId, isBroadcast }, { rejectWithValue }) => {
+		try {
+			await postNotificationsRead({
+				address,
+				notificationId,
+			});
+			return { notificationId, isBroadcast };
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -143,6 +159,27 @@ export const notificationsSlice = createSlice({
 		});
 		builder.addCase(updateSubscribeChannels.rejected, (state, action) => {
 			state.subscriptionChannelsIsLoading = false;
+			state.error = action.payload;
+		});
+		//
+		//
+		//
+		builder.addCase(updateAnnounceAndNotificationsListRead.pending, (state) => {
+			state.listIsLoading = true;
+		});
+		builder.addCase(updateAnnounceAndNotificationsListRead.fulfilled, (state, action) => {
+			if (action.payload.isBroadcast) {
+				const targetObj = find(state.announcementsList, { _id: action.payload.notificationId });
+				targetObj.read = true;
+			} else {
+				const targetObj = find(state.notificationsList, { _id: action.payload.notificationId });
+				targetObj.read = true;
+			}
+
+			state.listIsLoading = false;
+		});
+		builder.addCase(updateAnnounceAndNotificationsListRead.rejected, (state, action) => {
+			state.listIsLoading = false;
 			state.error = action.payload;
 		});
 	},

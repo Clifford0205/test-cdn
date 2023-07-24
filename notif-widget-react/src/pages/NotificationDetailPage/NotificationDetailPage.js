@@ -25,6 +25,7 @@ import {
 	postNotificationsClick,
 } from 'SRC/api/notifications';
 import NotificationMsg from 'SRC/components/NotificationMsg/NotificationMsg';
+import { updateAnnounceAndNotificationsListRead } from 'SRC/store/notifications/notifications.reducer';
 import { selectUserAddress } from 'SRC/store/user/user.selector';
 import { formatSendingTime } from 'SRC/utils/utils';
 
@@ -32,6 +33,7 @@ function NotificationDetailPage() {
 	const { notificationId } = useParams();
 	const [notificationDetail, setNotificationDetail] = useState(null);
 	const userAddress = useSelector(selectUserAddress);
+	const dispatch = useDispatch();
 
 	const initNotificationDetail = async () => {
 		try {
@@ -39,10 +41,14 @@ function NotificationDetailPage() {
 				address: userAddress,
 				notificationId,
 			});
-			postNotificationsRead({
-				address: userAddress,
-				notificationId,
-			});
+			dispatch(
+				updateAnnounceAndNotificationsListRead({
+					address: userAddress,
+					notificationId,
+					isBroadcast: detail.isBroadcast,
+				}),
+			);
+
 			setNotificationDetail(detail);
 		} catch (error) {
 			console.log('error: ', error);
