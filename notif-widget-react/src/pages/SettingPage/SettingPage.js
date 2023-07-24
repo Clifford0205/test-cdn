@@ -3,7 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
+import { includes } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import {
@@ -18,11 +20,17 @@ import {
 
 import StatusLabel from 'SRC/components/StatusLabel/StatusLabel';
 import UnsubscribeDrawer from 'SRC/components/UnsubscribeDrawer/UnsubscribeDrawer';
+import { updateSubscribeChannels } from 'SRC/store/notifications/notifications.reducer';
+import { selectSubscriptionChannels } from 'SRC/store/notifications/notifications.selector';
+import { selectUserAddress } from 'SRC/store/user/user.selector';
 import { getShortAddress } from 'SRC/utils/utils';
 
 function SubscribeSuccessPage() {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const subscriptionChannels = useSelector(selectSubscriptionChannels);
+	const userAddress = useSelector(selectUserAddress);
 
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -35,8 +43,15 @@ function SubscribeSuccessPage() {
 		setDrawerOpen(false);
 	};
 
-	const handleSubscribe = () => {
-		navigate('/subscribeSuccess');
+	const handleSubscribe = async () => {
+		try {
+			await dispatch(
+				updateSubscribeChannels({ address: userAddress, subscriptionChannel: 'bell' }),
+			);
+			navigate('/subscribeSuccess');
+		} catch (error) {
+			console.log('error: ', error);
+		}
 	};
 
 	return (
@@ -46,14 +61,15 @@ function SubscribeSuccessPage() {
 					<StyledSettingIcon>
 						<i className='font-icon-ic_widjet font-size-16' />
 					</StyledSettingIcon>
-					<StyledAddress>
-						{getShortAddress('0x81495eBd37c266ccb6516E037d7f76ABf016624e')}
-					</StyledAddress>
+					<StyledAddress>{getShortAddress(userAddress)}</StyledAddress>
 					<Box sx={{ ml: 'auto' }}>
-						{/* <StatusLabel>Subscribed</StatusLabel> */}
-						<StatusLabel type='secondary' onClick={handleSubscribe}>
-							Resubscribe
-						</StatusLabel>
+						{subscriptionChannels.includes('bell') ? (
+							<StatusLabel>Subscribed</StatusLabel>
+						) : (
+							<StatusLabel type='secondary' onClick={handleSubscribe}>
+								Resubscribe
+							</StatusLabel>
+						)}
 					</Box>
 				</StyledAddressNotificationContainer>
 			</StyledNotifyWays>

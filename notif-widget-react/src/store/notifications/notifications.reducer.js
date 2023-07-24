@@ -1,13 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { includes } from 'lodash-es';
 
-import { fetchNotificationsList } from 'SRC/api/notifications';
+import {
+	fetchNotificationsList,
+	fetchNotificationsSetting,
+	postUnsubscribeChannels,
+	postSubscribeChannel,
+} from 'SRC/api/notifications';
 
 export const INITIAL_STATE = {
 	notificationsList: [],
 	announcementsList: [],
+	subscriptionChannels: [],
 	listIsLoading: false,
+	subscriptionChannelsIsLoading: false,
 	error: null,
-	subscribeDrawerOpen: true,
+	subscribeDrawerOpen: false,
 };
 
 export const getAnnounceAndNotificationsList = createAsyncThunk(
@@ -16,6 +24,53 @@ export const getAnnounceAndNotificationsList = createAsyncThunk(
 		try {
 			const announceAndNotificationsList = await fetchNotificationsList({ address });
 			return announceAndNotificationsList;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+export const updateUnsubscribeChannels = createAsyncThunk(
+	'notifications/updateUnsubscribeChannels',
+	async ({ address, unsubscribeChannels }, { rejectWithValue }) => {
+		console.log('unsubscribeChannels: ', unsubscribeChannels);
+		try {
+			const subscriptionChannelsObj = await postUnsubscribeChannels({
+				address,
+				unsubscribeChannels,
+			});
+			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
+
+			return subscriptionChannelsObj;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+export const updateSubscribeChannels = createAsyncThunk(
+	'notifications/updateSubscribeChannels',
+	async ({ address, subscriptionChannel }, { rejectWithValue }) => {
+		try {
+			const subscriptionChannelsObj = await postSubscribeChannel({
+				address,
+				subscriptionChannel,
+			});
+			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
+
+			return subscriptionChannelsObj;
+		} catch (error) {
+			return rejectWithValue(error);
+		}
+	},
+);
+
+export const getSubscriptionChannels = createAsyncThunk(
+	'notifications/getSubscriptionChannels',
+	async ({ address }, { rejectWithValue }) => {
+		try {
+			const subscriptionChannelsSetting = await fetchNotificationsSetting({ address });
+			return subscriptionChannelsSetting;
 		} catch (error) {
 			return rejectWithValue(error);
 		}
@@ -41,6 +96,53 @@ export const notificationsSlice = createSlice({
 		});
 		builder.addCase(getAnnounceAndNotificationsList.rejected, (state, action) => {
 			state.listIsLoading = false;
+			state.error = action.payload;
+		});
+		//
+		//
+		//
+		builder.addCase(getSubscriptionChannels.pending, (state) => {
+			state.subscriptionChannelsIsLoading = true;
+		});
+		builder.addCase(getSubscriptionChannels.fulfilled, (state, action) => {
+			state.subscriptionChannelsIsLoading = false;
+			state.subscriptionChannels = action.payload.subscriptionChannels;
+			if (!action.payload.subscriptionChannels.includes('bell')) {
+				state.subscribeDrawerOpen = true;
+			}
+		});
+		builder.addCase(getSubscriptionChannels.rejected, (state, action) => {
+			state.subscriptionChannelsIsLoading = false;
+			state.error = action.payload;
+		});
+		//
+		//
+		//
+		builder.addCase(updateUnsubscribeChannels.pending, (state) => {
+			state.subscriptionChannelsIsLoading = true;
+		});
+		builder.addCase(updateUnsubscribeChannels.fulfilled, (state, action) => {
+			console.log('action: ', action);
+			state.subscriptionChannelsIsLoading = false;
+			state.subscriptionChannels = action.payload.subscriptionChannels;
+		});
+		builder.addCase(updateUnsubscribeChannels.rejected, (state, action) => {
+			state.subscriptionChannelsIsLoading = false;
+			state.error = action.payload;
+		});
+
+		//
+		//
+		//
+		builder.addCase(updateSubscribeChannels.pending, (state) => {
+			state.subscriptionChannelsIsLoading = true;
+		});
+		builder.addCase(updateSubscribeChannels.fulfilled, (state, action) => {
+			state.subscriptionChannelsIsLoading = false;
+			state.subscriptionChannels = action.payload.subscriptionChannels;
+		});
+		builder.addCase(updateSubscribeChannels.rejected, (state, action) => {
+			state.subscriptionChannelsIsLoading = false;
 			state.error = action.payload;
 		});
 	},

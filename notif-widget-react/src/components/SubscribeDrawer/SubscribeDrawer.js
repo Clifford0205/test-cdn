@@ -4,6 +4,7 @@ import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-mater
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 import {
@@ -16,15 +17,27 @@ import {
 	StyledLaterButton,
 } from './SubscribeDrawer.styles';
 
+import { updateSubscribeChannels } from 'SRC/store/notifications/notifications.reducer';
+import { selectUserAddress } from 'SRC/store/user/user.selector';
+
 function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 	const theme = useTheme();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const userAddress = useSelector(selectUserAddress);
 
 	const [contentVisible, setContentVisible] = useState(onDrawerOpen);
 
-	const handleSubscribe = () => {
-		navigate('/subscribeSuccess');
-		onHandleCloseSubscribeDrawer();
+	const handleSubscribe = async () => {
+		try {
+			await dispatch(
+				updateSubscribeChannels({ address: userAddress, subscriptionChannel: 'bell' }),
+			);
+			navigate('/subscribeSuccess');
+			onHandleCloseSubscribeDrawer();
+		} catch (error) {
+			console.log('error: ', error);
+		}
 	};
 
 	// 為了讓動畫效果更順暢

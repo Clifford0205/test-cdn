@@ -15,11 +15,15 @@ import SubscribeDrawer from '../SubscribeDrawer/SubscribeDrawer';
 import { StyledPopoverContentContainer } from './PopoverContentContainer.styles';
 
 import { setSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.reducer';
-import { selectSubscribeDrawerOpen } from 'SRC/store/notifications/notifications.selector';
+import {
+	selectSubscribeDrawerOpen,
+	selectSubscriptionChannels,
+} from 'SRC/store/notifications/notifications.selector';
 
 function PopoverContentContainer({ onClose }) {
 	// const [drawerOpen, setDrawerOpen] = useState(true);
 	const subscribeDrawerOpen = useSelector(selectSubscribeDrawerOpen);
+	const subscriptionChannels = useSelector(selectSubscriptionChannels);
 	const dispatch = useDispatch();
 
 	const location = useLocation();

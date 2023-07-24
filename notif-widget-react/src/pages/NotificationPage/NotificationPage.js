@@ -25,14 +25,6 @@ import {
 	selectAnnouncementsList,
 } from 'SRC/store/notifications/notifications.selector';
 
-const numbers = [
-	{ notificationId: '1' },
-	{ notificationId: '2' },
-	{ notificationId: '3' },
-	{ notificationId: '4' },
-	{ notificationId: '5' },
-];
-
 function NotificationPage() {
 	const [address, setAddress] = useState(true);
 	const notificationsList = useSelector(selectNotificationsList);
@@ -58,7 +50,7 @@ function NotificationPage() {
 		<>
 			<StyledAnnounceContainer>
 				{announcementsList.map((announcement, index) => (
-					<StyledAnnounce to={`/detail/${announcement._id}`}>
+					<StyledAnnounce to={`/detail/${announcement._id}`} key={announcement._id}>
 						{!announcement.read && <StyledRedDot />}
 						<StyledAnnounceTitle>{announcement.title}</StyledAnnounceTitle>
 						<StyledAnnounceContent>{announcement.description}</StyledAnnounceContent>
@@ -66,7 +58,7 @@ function NotificationPage() {
 				))}
 			</StyledAnnounceContainer>
 			{notificationsList.map((notification, index) => (
-				<NotificationMsg notificationInfo={notification} key={index} />
+				<NotificationMsg notificationInfo={notification} key={notification._id} />
 			))}
 		</>
 	);

@@ -24,7 +24,7 @@ import { formatSendingTime } from 'SRC/utils/utils';
 function NotificationMsg({ notificationInfo }) {
 	return (
 		<StyledNotificationMsgContainer to={`/detail/${notificationInfo._id}`}>
-			{notificationInfo.read && (
+			{!notificationInfo.read && (
 				<StyledRedDotContainer>
 					<StyledRedDot />
 				</StyledRedDotContainer>

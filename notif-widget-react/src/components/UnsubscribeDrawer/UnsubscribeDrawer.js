@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { isEmpty } from 'lodash-es';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 import CustomCheckbox from '../CustomCheckbox/CustomCheckbox';
 
@@ -23,21 +24,36 @@ import {
 	StyledSuccessUnsubscribeText,
 } from './UnSubscribeDrawer.styles';
 
+import { updateUnsubscribeChannels } from 'SRC/store/notifications/notifications.reducer';
+import { selectSubscriptionChannels } from 'SRC/store/notifications/notifications.selector';
+import { selectUserAddress } from 'SRC/store/user/user.selector';
+
 function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 	const theme = useTheme();
 	const [contentVisible, setContentVisible] = useState(onDrawerOpen);
 	const [selected, setSelected] = useState([]);
+	const dispatch = useDispatch();
+	const userAddress = useSelector(selectUserAddress);
+
+	const subscriptionChannels = useSelector(selectSubscriptionChannels);
+
 	const [step, setStep] = useState(1);
+
+	useEffect(() => {
+		if (!onDrawerOpen) {
+			setSelected([]);
+		}
+	}, [onDrawerOpen, subscriptionChannels]);
 
 	const notificationWays = [
 		{
 			name: 'Bell Widget',
-			value: 'Bell Widget',
+			value: 'bell',
 			icon: <i className='font-icon-ic_widjet font-size-16' />,
 		},
 		// {
 		// 	name: 'Email',
-		// 	value: 'Email',
+		// 	value: 'email',
 		// 	icon: <i className='font-icon-ic_email font-size-16' />,
 		// },
 		// {
@@ -72,8 +88,18 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 		setStep(2);
 	};
 
-	const handleConfirmCancel = () => {
-		setStep(3);
+	const handleConfirmCancel = async () => {
+		try {
+			await dispatch(
+				updateUnsubscribeChannels({
+					address: userAddress,
+					unsubscribeChannels: selected,
+				}),
+			);
+			setStep(3);
+		} catch (error) {
+			console.log('error: ', error);
+		}
 	};
 
 	// 為了讓動畫效果更順暢
