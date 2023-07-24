@@ -1,5 +1,5 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
-import { includes, find } from 'lodash-es';
+import { find } from 'lodash-es';
 
 import {
 	fetchNotificationsList,

@@ -50,7 +50,16 @@ export const StyledUnSubscribeAreaGuideText = styled('div', {
 
 export const StyledUnSubscribeCheckArea = styled('div', {
 	shouldForwardProp: isStyledPropsValid,
-})(({ theme }) => ({}));
+})(({ theme }) => ({
+	marginBottom: '5px',
+}));
+
+export const StyledNoChannelForUnsubscribe = styled('div', {
+	shouldForwardProp: isStyledPropsValid,
+})(({ theme }) => ({
+	textAlign: 'center',
+	fontSize: '12px',
+}));
 
 export const StyledSingleNotifyWay = styled('div', {
 	shouldForwardProp: isStyledPropsValid,

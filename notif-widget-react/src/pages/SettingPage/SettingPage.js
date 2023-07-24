@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
-import { includes } from 'lodash-es';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';

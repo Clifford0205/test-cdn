@@ -15,6 +15,7 @@ import {
 	StyledUnsubscribeAreaContainer,
 	StyledUnSubscribeAreaGuideText,
 	StyledUnSubscribeCheckArea,
+	StyledNoChannelForUnsubscribe,
 	StyledSingleNotifyWay,
 	StyledConfirmMsgTitle,
 	StyledConfirmMsg,
@@ -125,31 +126,41 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 								選擇需取消訂閱的渠道：
 							</StyledUnSubscribeAreaGuideText>
 							<StyledUnSubscribeCheckArea>
-								<Grid container spacing={0.5}>
-									{notificationWays.map((notificationWay, index) => {
-										const isItemSelected = isSelected(notificationWay.value);
-										return (
-											<Grid xs={6} item key={notificationWay.name}>
-												<CustomCheckbox
-													label={
-														<StyledSingleNotifyWay>
-															{notificationWay.icon}
-															{notificationWay.name}
-														</StyledSingleNotifyWay>
-													}
-													checked={isItemSelected}
-													onChange={handleClick}
-													name={notificationWay.name}
-													value={notificationWay.value}
-												/>
-											</Grid>
-										);
-									})}
-								</Grid>
+								{isEmpty(subscriptionChannels) ? (
+									<StyledNoChannelForUnsubscribe>
+										所有渠道皆以取消訂閱
+									</StyledNoChannelForUnsubscribe>
+								) : (
+									<Grid container spacing={0.5}>
+										{notificationWays.map((notificationWay, index) => {
+											if (!subscriptionChannels.includes(notificationWay.value)) {
+												return null;
+											}
+
+											const isItemSelected = isSelected(notificationWay.value);
+											return (
+												<Grid xs={6} item key={notificationWay.name}>
+													<CustomCheckbox
+														label={
+															<StyledSingleNotifyWay>
+																{notificationWay.icon}
+																{notificationWay.name}
+															</StyledSingleNotifyWay>
+														}
+														checked={isItemSelected}
+														onChange={handleClick}
+														name={notificationWay.name}
+														value={notificationWay.value}
+													/>
+												</Grid>
+											);
+										})}
+									</Grid>
+								)}
 							</StyledUnSubscribeCheckArea>
 						</Box>
 						<Grid container spacing={0.5}>
-							<Grid xs={6} item>
+							<Grid xs={isEmpty(subscriptionChannels) ? 12 : 6} item>
 								<Button
 									fullWidth
 									color={COLOR.SETTING}
@@ -160,14 +171,16 @@ function UnsubscribeDrawer({ onDrawerOpen, onHandleCloseUnsubscribeDrawer }) {
 								</Button>
 							</Grid>
 							<Grid xs={6} item>
-								<Button
-									fullWidth
-									color={COLOR.SECONDARY}
-									disabled={isEmpty(selected)}
-									onClick={handleToConfirm}
-								>
-									Next
-								</Button>
+								{!isEmpty(subscriptionChannels) && (
+									<Button
+										fullWidth
+										color={COLOR.SECONDARY}
+										disabled={isEmpty(selected)}
+										onClick={handleToConfirm}
+									>
+										Next
+									</Button>
+								)}
 							</Grid>
 						</Grid>
 					</StyledUnsubscribeAreaContainer>

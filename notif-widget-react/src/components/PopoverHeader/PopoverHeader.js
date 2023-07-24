@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { Toolbar, AppBar, useTheme } from '@mui/material';
-import { includes } from 'lodash-es';
 import PropTypes from 'prop-types';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
