@@ -17,6 +17,11 @@ export const selectAnnouncementsList = createSelector(
 	(notificationsSlice) => notificationsSlice.announcementsList,
 );
 
+export const selectUnread = createSelector(
+	[selectNotificationsReducer],
+	(notificationsSlice) => notificationsSlice.unread,
+);
+
 export const selectListIsLoading = createSelector(
 	[selectNotificationsReducer],
 	(notificationsSlice) => notificationsSlice.listIsLoading,

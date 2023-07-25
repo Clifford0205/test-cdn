@@ -17,6 +17,7 @@ export const INITIAL_STATE = {
 	subscriptionChannelsIsLoading: false,
 	error: null,
 	subscribeDrawerOpen: false,
+	unRead: false,
 };
 
 export const getAnnounceAndNotificationsList = createAsyncThunk(
@@ -49,7 +50,6 @@ export const updateAnnounceAndNotificationsListRead = createAsyncThunk(
 export const updateUnsubscribeChannels = createAsyncThunk(
 	'notifications/updateUnsubscribeChannels',
 	async ({ address, unsubscribeChannels }, { rejectWithValue }) => {
-		console.log('unsubscribeChannels: ', unsubscribeChannels);
 		try {
 			const subscriptionChannelsObj = await postUnsubscribeChannels({
 				address,
@@ -72,7 +72,6 @@ export const updateSubscribeChannels = createAsyncThunk(
 				address,
 				subscriptionChannel,
 			});
-			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
 
 			return subscriptionChannelsObj;
 		} catch (error) {
@@ -109,6 +108,7 @@ export const notificationsSlice = createSlice({
 			state.listIsLoading = false;
 			state.notificationsList = action.payload.notifications;
 			state.announcementsList = action.payload.announcements;
+			state.unread = action.payload.unread;
 		});
 		builder.addCase(getAnnounceAndNotificationsList.rejected, (state, action) => {
 			state.listIsLoading = false;

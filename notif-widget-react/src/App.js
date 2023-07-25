@@ -17,6 +17,7 @@ import PopoverContentContainer from 'SRC/components/PopoverContentContainer/Popo
 import { FRAME_OPENED, FRAME_CLOSED, FRAME_HEIGHT_VIEWPORT } from 'SRC/constants/iframeSizes';
 import useWindowSize from 'SRC/hooks/useWindowSize.hooks';
 import { setFrameSize } from 'SRC/index';
+import { selectUnread } from 'SRC/store/notifications/notifications.selector';
 import { updateUserAddressAndAnnouncementsAndNotifications } from 'SRC/store/others/others.reducer';
 import { selectUserAddress } from 'SRC/store/user/user.selector';
 
@@ -30,6 +31,7 @@ function App({ parentWindow }) {
 	const id = open ? 'simple-popover' : undefined;
 	const theme = useTheme();
 	const userAddress = useSelector(selectUserAddress);
+	const unread = useSelector(selectUnread);
 
 	const onInit = async () => {
 		if (!get(parentWindow, 'ethereum')) {
@@ -99,11 +101,14 @@ function App({ parentWindow }) {
 	return (
 		<>
 			<StyledIconButton onClick={handleClick} size={60} color={theme.customColors.grey[700]}>
-				{/* <i className='font-icon-ic_widjet' /> */}
-				<Box position='relative'>
-					<StyledRedDot />
-					<i className='font-icon-ic_widjet_crook' />
-				</Box>
+				{unread ? (
+					<Box position='relative'>
+						<StyledRedDot />
+						<i className='font-icon-ic_widjet_crook' />
+					</Box>
+				) : (
+					<i className='font-icon-ic_widjet' />
+				)}
 			</StyledIconButton>
 			<StyledPopover
 				id={id}
