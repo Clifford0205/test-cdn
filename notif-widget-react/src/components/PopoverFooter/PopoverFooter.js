@@ -14,7 +14,7 @@ function PopoverFooter({ onClose }) {
 		<StyledFooterContainer>
 			<StyledPoweredBy>
 				<div className='text'>Powered by</div>
-				<IconIcMetaCRM sx={{ marginLeft: '5px' }} width='86px' />
+				<IconIcMetaCRM sx={{ marginLeft: '5px' }} width={86} />
 			</StyledPoweredBy>
 		</StyledFooterContainer>
 	);

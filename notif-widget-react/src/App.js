@@ -49,21 +49,23 @@ function App({ parentWindow }) {
 			// const accounts = await parentWindow.ethereum.request({
 			// 	method: 'eth_requestAccounts',
 			// });
-			// setAddress(accounts[0]);
+			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(accounts[0]));
 			// console.log('accounts[0]: ', accounts[0]);
 
 			// parentWindow.ethereum.on('accountsChanged', (newAccounts) => {
 			// 	try {
 			// 		// Time to reload your interface with accounts[0]!
-			// 		setAddress(newAccounts[0]);
+			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(newAccounts[0]));
 			// 	} catch (error) {
 			// 		setAddress(null);
+			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(null));
+
 			// 		console.error('An error occurred in the accountsChanged event handler:', error);
 			// 	}
 			// });
 		} catch (error) {
 			console.error('An error occurred:', error);
-			setAddress(null);
+			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(null));
 		}
 	};
 
