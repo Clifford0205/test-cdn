@@ -95,8 +95,8 @@ function AppFrameComponent(props) {
 			<FrameContextConsumer>
 				{({ document, window }) => {
 					const cache = createCache({
-						key: 'mui',
-						container: iframeRef?.current?.contentWindow?.document?.head,
+						key: 'mui-css',
+						container: iframeRef?.current?.contentWindow?.document?.body,
 						prepend: true,
 					});
 					return (
@@ -116,9 +116,14 @@ function AppFrameComponent(props) {
 	);
 }
 
-window.addEventListener('load', (event) => {
-	ReactDOM.render(<AppFrameComponent />, newElement);
+// window.addEventListener('load', (event) => {
+// 	ReactDOM.render(<AppFrameComponent />, newElement);
 
-	const widgetElement = document.getElementById('meta-crm-widget');
-	setFrameSize(widgetElement, FRAME_CLOSED);
-});
+// 	const widgetElement = document.getElementById('meta-crm-widget');
+// 	setFrameSize(widgetElement, FRAME_CLOSED);
+// });
+
+ReactDOM.render(<AppFrameComponent />, newElement);
+
+const widgetElement = document.getElementById('meta-crm-widget');
+setFrameSize(widgetElement, FRAME_CLOSED);

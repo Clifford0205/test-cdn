@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Button, IconButton, SIZE, COLOR, VARIANT } from '@metacrm/metacrm-material-ui/dist/Button';
 import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
+import { get } from 'lodash-es';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -30,9 +31,14 @@ function SubscribeDrawer({ onDrawerOpen, onHandleCloseSubscribeDrawer }) {
 
 	const handleSubscribe = async () => {
 		try {
-			await dispatch(
+			const actionResult = await dispatch(
 				updateSubscribeChannels({ address: userAddress, subscriptionChannel: 'bell' }),
 			);
+
+			if (get(actionResult, 'error')) {
+				console.log('handleSubscribe error', get(actionResult, 'error.message'));
+				return;
+			}
 			navigate('/subscribeSuccess');
 			onHandleCloseSubscribeDrawer();
 		} catch (error) {

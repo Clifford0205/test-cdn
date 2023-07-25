@@ -55,8 +55,6 @@ export const updateUnsubscribeChannels = createAsyncThunk(
 				address,
 				unsubscribeChannels,
 			});
-			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
-
 			return subscriptionChannelsObj;
 		} catch (error) {
 			return rejectWithValue(error);
@@ -72,6 +70,7 @@ export const updateSubscribeChannels = createAsyncThunk(
 				address,
 				subscriptionChannel,
 			});
+			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
 
 			return subscriptionChannelsObj;
 		} catch (error) {
@@ -138,7 +137,6 @@ export const notificationsSlice = createSlice({
 			state.subscriptionChannelsIsLoading = true;
 		});
 		builder.addCase(updateUnsubscribeChannels.fulfilled, (state, action) => {
-			console.log('action: ', action);
 			state.subscriptionChannelsIsLoading = false;
 			state.subscriptionChannels = action.payload.subscriptionChannels;
 		});

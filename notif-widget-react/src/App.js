@@ -38,33 +38,29 @@ function App({ parentWindow }) {
 			return;
 		}
 		try {
-			await dispatch(
-				updateUserAddressAndAnnouncementsAndNotifications(
-					'0x81495eBd37c266ccb6516E037d7f76ABf016624e',
-				),
-			);
-			// dispatch(
-			// 	getAnnounceAndNotificationsList({ address: '0x81495eBd37c266ccb6516E037d7f76ABf016624e' }),
+			// await dispatch(
+			// 	updateUserAddressAndAnnouncementsAndNotifications(
+			// 		'0x81495eBd37c266ccb6516E037d7f76ABf016624e',
+			// 	),
 			// );
 
-			// await parentWindow.ethereum.enable();
-			// const accounts = await parentWindow.ethereum.request({
-			// 	method: 'eth_requestAccounts',
-			// });
-			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(accounts[0]));
-			// console.log('accounts[0]: ', accounts[0]);
+			await parentWindow.ethereum.enable();
+			const accounts = await parentWindow.ethereum.request({
+				method: 'eth_requestAccounts',
+			});
+			dispatch(updateUserAddressAndAnnouncementsAndNotifications(accounts[0]));
 
-			// parentWindow.ethereum.on('accountsChanged', (newAccounts) => {
-			// 	try {
-			// 		// Time to reload your interface with accounts[0]!
-			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(newAccounts[0]));
-			// 	} catch (error) {
-			// 		setAddress(null);
-			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(null));
+			parentWindow.ethereum.on('accountsChanged', (newAccounts) => {
+				try {
+					// Time to reload your interface with accounts[0]!
+					dispatch(updateUserAddressAndAnnouncementsAndNotifications(newAccounts[0]));
+				} catch (error) {
+					setAddress(null);
+					dispatch(updateUserAddressAndAnnouncementsAndNotifications(null));
 
-			// 		console.error('An error occurred in the accountsChanged event handler:', error);
-			// 	}
-			// });
+					console.error('An error occurred in the accountsChanged event handler:', error);
+				}
+			});
 		} catch (error) {
 			console.error('An error occurred:', error);
 			// dispatch(updateUserAddressAndAnnouncementsAndNotifications(null));
