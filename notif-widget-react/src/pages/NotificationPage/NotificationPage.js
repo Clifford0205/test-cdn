@@ -24,11 +24,12 @@ import {
 	selectNotificationsList,
 	selectAnnouncements,
 } from 'SRC/store/notifications/notifications.selector';
+import { selectUserAddress } from 'SRC/store/user/user.selector';
 
 function NotificationPage() {
-	const [address, setAddress] = useState(true);
 	const notificationsList = useSelector(selectNotificationsList);
 	const announcements = useSelector(selectAnnouncements);
+	const userAddress = useSelector(selectUserAddress);
 
 	const renderNoConnect = () => (
 		<StyledNoConnect>
@@ -68,7 +69,7 @@ function NotificationPage() {
 		return renderNotifications();
 	};
 
-	return <>{address ? hasAnyNotification() : renderNoConnect()}</>;
+	return <>{userAddress ? hasAnyNotification() : renderNoConnect()}</>;
 }
 
 NotificationPage.propTypes = {};
