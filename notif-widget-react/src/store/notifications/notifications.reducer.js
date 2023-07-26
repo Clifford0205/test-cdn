@@ -11,7 +11,7 @@ import {
 
 export const INITIAL_STATE = {
 	notificationsList: [],
-	announcementsList: [],
+	announcements: {},
 	subscriptionChannels: [],
 	listIsLoading: false,
 	subscriptionChannelsIsLoading: false,
@@ -70,8 +70,6 @@ export const updateSubscribeChannels = createAsyncThunk(
 				address,
 				subscriptionChannel,
 			});
-			console.log('subscriptionChannelsObj: ', subscriptionChannelsObj);
-
 			return subscriptionChannelsObj;
 		} catch (error) {
 			return rejectWithValue(error);
@@ -106,7 +104,7 @@ export const notificationsSlice = createSlice({
 		builder.addCase(getAnnounceAndNotificationsList.fulfilled, (state, action) => {
 			state.listIsLoading = false;
 			state.notificationsList = action.payload.notifications;
-			state.announcementsList = action.payload.announcements;
+			state.announcements = action.payload.announcements;
 			state.unread = action.payload.unread;
 		});
 		builder.addCase(getAnnounceAndNotificationsList.rejected, (state, action) => {
@@ -167,8 +165,7 @@ export const notificationsSlice = createSlice({
 		});
 		builder.addCase(updateAnnounceAndNotificationsListRead.fulfilled, (state, action) => {
 			if (action.payload.isBroadcast) {
-				const targetObj = find(state.announcementsList, { _id: action.payload.notificationId });
-				targetObj.read = true;
+				state.announcements.read = true;
 			} else {
 				const targetObj = find(state.notificationsList, { _id: action.payload.notificationId });
 				targetObj.read = true;

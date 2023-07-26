@@ -22,13 +22,13 @@ import {
 import NotificationMsg from 'SRC/components/NotificationMsg/NotificationMsg';
 import {
 	selectNotificationsList,
-	selectAnnouncementsList,
+	selectAnnouncements,
 } from 'SRC/store/notifications/notifications.selector';
 
 function NotificationPage() {
 	const [address, setAddress] = useState(true);
 	const notificationsList = useSelector(selectNotificationsList);
-	const announcementsList = useSelector(selectAnnouncementsList);
+	const announcements = useSelector(selectAnnouncements);
 
 	const renderNoConnect = () => (
 		<StyledNoConnect>
@@ -49,13 +49,11 @@ function NotificationPage() {
 	const renderNotifications = () => (
 		<>
 			<StyledAnnounceContainer>
-				{announcementsList.map((announcement, index) => (
-					<StyledAnnounce to={`/detail/${announcement._id}`} key={announcement._id}>
-						{!announcement.read && <StyledRedDot />}
-						<StyledAnnounceTitle>{announcement.title}</StyledAnnounceTitle>
-						<StyledAnnounceContent>{announcement.description}</StyledAnnounceContent>
-					</StyledAnnounce>
-				))}
+				<StyledAnnounce to={`/detail/${announcements._id}`} key={announcements._id}>
+					{!announcements.read && <StyledRedDot />}
+					<StyledAnnounceTitle>{announcements.title}</StyledAnnounceTitle>
+					<StyledAnnounceContent>{announcements.description}</StyledAnnounceContent>
+				</StyledAnnounce>
 			</StyledAnnounceContainer>
 			{notificationsList.map((notification, index) => (
 				<NotificationMsg notificationInfo={notification} key={notification._id} />
@@ -64,7 +62,7 @@ function NotificationPage() {
 	);
 
 	const hasAnyNotification = () => {
-		if (isEmpty(notificationsList) && isEmpty(announcementsList)) {
+		if (isEmpty(notificationsList) && isEmpty(announcements)) {
 			return renderWithoutNotification();
 		}
 		return renderNotifications();
