@@ -119,8 +119,11 @@ export const notificationsSlice = createSlice({
 		});
 		builder.addCase(getSubscriptionChannels.fulfilled, (state, action) => {
 			state.subscriptionChannelsIsLoading = false;
-			state.subscriptionChannels = action.payload.subscriptionChannels;
-			if (!action.payload.subscriptionChannels.includes('bell')) {
+			state.subscriptionChannels = action?.payload?.subscriptionChannels;
+			if (
+				action?.payload?.subscriptionChannels &&
+				!action.payload.subscriptionChannels.includes('bell')
+			) {
 				state.subscribeDrawerOpen = true;
 			}
 		});
