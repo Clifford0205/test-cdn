@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/static/js/widget.js",
+    "static/media/font-icon.ttf?t=1689859149044": "/static/media/font-icon.a30ae7315f02b52e1877.ttf",
+    "static/media/font-icon.woff?t=1689859149044": "/static/media/font-icon.39c43395174ebbf19114.woff",
+    "static/media/font-icon.woff2?t=1689859149044": "/static/media/font-icon.6cfea148ccf1eb6cd259.woff2",
+    "index.html": "/index.html",
+    "static/media/ic_checkboxDisabled.svg": "/static/media/ic_checkboxDisabled.2511c3853991e0eba84e72d0aae0e59a.svg",
+    "widget.js.map": "/static/js/widget.js.map"
+  },
+  "entrypoints": [
+    "static/js/widget.js"
+  ]
+}

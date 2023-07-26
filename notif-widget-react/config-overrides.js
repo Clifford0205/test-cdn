@@ -32,7 +32,9 @@ module.exports = override(
 			config.output = {
 				...config.output,
 				filename: 'static/js/widget.js',
-				path: resolveApp('../demo/public'),
+				path: path.resolve(__dirname, '../demo/public/widget'),
+				publicPath: '../widget/',
+				// path: resolveApp('../demo/public/widget'),
 			};
 		}
 		return config;
