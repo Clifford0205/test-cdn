@@ -80,7 +80,7 @@ function AppFrameComponent(props) {
 			if (headNode) {
 				const originalHTML = headNode.innerHTML;
 				const newHTML = document.head.innerHTML;
-				headNode.innerHTML = originalHTML + newHTML;
+				headNode.innerHTML = newHTML + originalHTML;
 			}
 		}
 
